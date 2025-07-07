@@ -1,7 +1,7 @@
 <div class="card shadow mb-4">
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
-                    <h3>INSCRIPTION</h3>
+                    <h3>AJOUTER UN MEMBRE ADMINISTRATIF</h3>
                 </div> 
                 <div>
                     {{-- <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Liste</a> --}}
@@ -48,7 +48,7 @@
                                 wire:model=""
                             >
 
-                            <label for="">Date de naissance</label>
+                            <label for="">Role</label>
                             <input 
                                 class="form-control"
                                 type="text"
@@ -56,7 +56,7 @@
                                 wire:model=""
                             >
 
-                            <label for="">Lieu de naissance</label>
+                            <label for="">Fonction</label>
                             <input 
                                 class="form-control"
                                 type="text"
@@ -70,27 +70,11 @@
                             <input 
                                 class="form-control"
                                 type="text"
-                                placeholder=""
+                                placeholder=""      
                                 wire:model=""
                             >
 
-                            <label for="">Classe</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
-
-                            <label for="">Option</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
-
-                            <label for="">Numéro Tuteur</label>
+                            <label for="">Phone</label>
                             <input 
                                 class="form-control"
                                 type="text"
@@ -108,3 +92,5 @@
             </form>
         </div>  
 </div> 
+
+

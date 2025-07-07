@@ -1,11 +1,11 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul style="background-color: rgb(7, 7, 99)" class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-0">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SPD Soft <sup></sup></div>
+                <div style="color:white;" class="sidebar-brand-text mx-3">Manage Akademy </div>
             </a>
 
             <!-- Divider -->
@@ -13,94 +13,121 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Acceuil</span></a>
+                <a class="nav-link" href="/">
+                    <i style="color:white;" class="fas fa-fw fa-tachometer-alt"></i>
+                    <span style="color:white;">Acceuil</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div style="color:white;" class="sidebar-heading">
                 Interface
             </div>
 
-            {{-- finances manage--}}
+            {{-- registration manage--}}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsefinances"
-                    aria-expanded="true" aria-controls="collapsefinances">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Finance</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseregistration"
+                    aria-expanded="true" aria-controls="collapseregistration">
+                    <i style="color:white;" class="fas fa-fw fa-users"></i>
+                    <span style="color:white;">Gestion des élèves</span>
                 </a>
-                <div id="collapsefinances" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseregistration" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestion finance:</h6>
-                        <a class="collapse-item" href="">Effectuer une demande</a>
-                        <a class="collapse-item" href="">Liste des demandes</a>
-                        <a class="collapse-item" href="">Rapport</a>
+                        <h6 style="color:black;" class="collapse-header">Gestion des élèves:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('registration.index')}}">Liste des élèves</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('registration.create')}}">Inscription</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('reregistration.create')}}">Reinscription</a>
                     </div>
                 </div>
             </li>
 
-            {{-- users manage --}}
+            {{-- Billing manage --}}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseusers"
-                    aria-expanded="true" aria-controls="collapseusers">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBilling"
+                    aria-expanded="true" aria-controls="collapseBilling">
+                    <i style="color:white;" class="fas fa-cog"></i>
+                    <span style="color:white;">Gestion des paiements</span>
                 </a>
-                <div id="collapseusers" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseBilling" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Gestion utilisateurs:</h6>
-                        <a class="collapse-item" href="">Ajouter un membre</a>
-                        <a class="collapse-item" href="">Liste des membres</a>
-                        <a class="collapse-item" href="">Rapport</a>
+                        <h6 style="color:black;" class="collapse-header">Payements des frais:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('payment.create')}}">Effectuer un paiement</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecovery"
+                    aria-expanded="true" aria-controls="collapseRecovery">
+                    <i style="color:white;" class="fas fa-cog"></i>
+                    <span style="color:white;">Gestion des recouvrements</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
+                <div id="collapseRecovery" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 style="color:black;" class="collapse-header">Recouvrements:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('recovery.create')}}">Imprimer les listes</a>
                     </div>
                 </div>
             </li>
-
+                        
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
+            <div style="color:white;" class="sidebar-heading">
+                Interface
             </div>
 
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+                    aria-expanded="true" aria-controls="collapseUsers">
+                    <i style="color:white;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color:white;">Gestion des utilisateurs</span>
+                </a>
+                <div id="collapseUsers" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Gestion des Utilisateurs:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('user.index')}}">Liste</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('user.create')}}">Ajouter</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFees"
+                    aria-expanded="true" aria-controls="collapseFees">
+                    <i style="color:white;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color:white;">Gestion des frais</span>
+                </a>
+                <div id="collapseFees" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Gestion des frais:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('fees.index')}}">Liste</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('fees.create')}}">Ajouter</a>
+                    </div>
+                </div>
+            </li>
+
             
-            <!-- Nav Item - Charts -->
+            {{-- <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <i style="color:white;" class="fas fa-fw fa-chart-area"></i>
+                    <span style="color:white;">Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
+                    <i style="color:white;" class="fas fa-fw fa-table"></i>
+                    <span style="color:white;">Tables</span></a>
+            </li> --}}
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

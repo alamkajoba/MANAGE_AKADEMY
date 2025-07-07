@@ -3,7 +3,7 @@
                 <form method="GET"
                     class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div>
-                        <h3>LISTE DES ELEVES</h3>
+                        <h3>LISTE DES FRAIS</h3>
                     </div>
                 </form>
                     <div class="col-auto">
@@ -56,21 +56,17 @@
                         <thead>
                             <tr style="background-color: rgb(7, 7, 99)" class="text-white">
                                 <th>Nom</th>
-                                <th>Postnom</th>
-                                <th>Prénom</th>
-                                <th>Classe</th>
-                                <th>Option</th>
+                                <th>Description</th>
+                                <th>Montant</th>
                                 <th colspan="3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{-- @forelse ($products as $product) --}}
                                 <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
+                                    <td>Janvier</td>
+                                    <td>Frais mensuel</td>
+                                    <td>50$</td>
                                     <td>
                                         {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                         <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
@@ -86,71 +82,9 @@
                                 </tr>
 
                                 <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
+                                    <td>Janvier</td>
+                                    <td>Frais mensuel</td>
+                                    <td>50$</td>
                                     <td>
                                         {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                         <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
