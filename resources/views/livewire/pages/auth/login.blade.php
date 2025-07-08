@@ -28,7 +28,7 @@ new #[Layout('layouts.guest')] class extends Component
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="text-center">
-        <img src="{{ asset('assets/images/logo.jpg') }}" alt="Logo" class="w-32 h-auto mx-auto rounded-circle">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="w-32 h-auto mx-auto rounded-circle">
     </div>
 
     <form wire:submit="login">

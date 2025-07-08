@@ -3,7 +3,9 @@
 namespace App\Livewire\Module\Registration;
 
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 
+#[Layout('layouts.app')]
 class RegistrationCreate extends Component
 {
     public function render()
