@@ -58,19 +58,21 @@
                                 <th>Nom</th>
                                 <th>Postnom</th>
                                 <th>Prénom</th>
+                                <th>Matricule</th>
                                 <th>Classe</th>
                                 <th>Option</th>
                                 <th colspan="3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($products as $product) --}}
+                            @forelse ($student as $students)
                                 <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
+                                    <td>{{$students->first_name}}</td>
+                                    <td>{{$students->middle_name}}</td>
+                                    <td>{{$students->last_name}}</td>
+                                    <td>{{$students->code}}</td>
+                                    <td>{{$students->class}}</td>
+                                    <td>{{$students->option}}</td>
                                     <td>
                                         {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                         <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
@@ -84,100 +86,20 @@
                                         <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
                                     </td>
                                 </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>Mac</td>
-                                    <td>5</td>
-                                    <td>Biologie Chimie</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-                            {{-- @empty
+                            @empty
                                 <tr>
                                     <td colspan="5" class="px-6 py-2.5 text-danger whitespace-nowrap text">
-                                        Oups! Aucun Produit trouvé.
+                                        Oups! Aucun Etudiant trouvé.
                                     </td>
                                 </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
 
                 </div>  
                 {{-- paginate --}}
                     <div class="mt-4">
-                        {{-- {{$products->links()}} --}}
-                    </div>
+                        {{$student->links()}}
+                </div>
             </div>  
         </div>  

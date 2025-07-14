@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\GenderEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +14,19 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('first_name');
+            $table->string('middle_name');
             $table->string('last_name');
             $table->date('birth_date');
-            $table->string('gender');
+            $table->string('birth_town');
+            $table->string('gender', GenderEnum::values());
+            $table->string('class');
+            $table->string('option');
             $table->string('address');
-            $table->string('phone');
-            $table->string('email')->nullable();
-            $table->string('is_active');
-            $table->foreignId('enrollment_id')->constrained()->onDelete('cascade');
+            $table->string('tutor_name');
+            $table->string('phone1');
+            $table->string('phone2')->nullable();
+            $table->string('code');
             $table->timestamps();
         });
     }
