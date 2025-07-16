@@ -54,64 +54,32 @@
                         
                             
                         <thead>
-                            <tr style="background-color: rgb(7, 7, 99)" class="text-white">
-                                <th>Nom</th>
-                                <th>Description</th>
-                                <th>Montant</th>
-                                <th colspan="3">Action</th>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Montant</th>
+                           
+                            <th colspan="3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($fees as $fes)
+                            <tr>
+                                <td>{{$fes->name}}</td>
+                                <td>{{$fes->description}}</td>
+                                <td>{{$fes->amount}}</td>
+                                <td><button class="btn btn-info">Détail</button></td>
+                                <td><a href="{{route('fees.update',$fes->id)}}" class="btn btn-success">Modifier</a></td>
+                                <td><button wire:click="deletefees({{$fes->id}})"  wire:confirm="voulez-vous vraiment supprimé?" class="btn btn-danger">Supprimer</button></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @forelse ($products as $product) --}}
-                                <tr>
-                                    <td>Janvier</td>
-                                    <td>Frais mensuel</td>
-                                    <td>50$</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Janvier</td>
-                                    <td>Frais mensuel</td>
-                                    <td>50$</td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
-                                    </td>
-                                    <td>
-                                        {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                        <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
-                                    </td>
-                                </tr>
-                            {{-- @empty
-                                <tr>
-                                    <td colspan="5" class="px-6 py-2.5 text-danger whitespace-nowrap text">
-                                        Oups! Aucun Produit trouvé.
-                                    </td>
-                                </tr>
-                            @endforelse --}}
-                        </tbody>
+                        @endforeach
+                    </tbody>
                     </table>
 
                 </div>  
                 {{-- paginate --}}
                     <div class="mt-4">
-                        {{-- {{$products->links()}} --}}
+                        {{-- {{$fees->links()}} --}}
                     </div>
             </div>  
         </div>  

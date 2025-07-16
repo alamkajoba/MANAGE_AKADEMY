@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Module\Fees\FeesCreate;
+use App\Livewire\Module\Fees\FeesUpdate;
 use App\Livewire\Module\Fees\FeesIndex;
 use App\Livewire\Module\Payment\PaymentCreate;
 use App\Livewire\Module\Recovery\RecoveryCreate;
@@ -49,7 +50,9 @@ Route::prefix('payment')->name('payment.')->group(function () {
 #Fees route
 Route::prefix('fees')->name('fees.')->group(function () {
     Route::get('feescreate', FeesCreate::class)->name('create');
+    Route::get('feesupdate/{id}', FeesUpdate::class)->name('update');
     Route::get('feesindex', FeesIndex::class)->name('index');
+    
 });
 
 #Recovery route
