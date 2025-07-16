@@ -4,7 +4,7 @@
                     <h3>INSCRIPTION</h3>
                 </div> 
                 <div>
-                    <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Voir la liste</a>
+                    <a href="{{ route('registration.index')}}" style="background-color: rgb(7, 7, 99)" class="btn text-white">Voir la liste</a>
                 </div>
         </div>
         {{-- table --}}

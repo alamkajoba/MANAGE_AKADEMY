@@ -31,16 +31,16 @@ class RegistrationCreate extends Component
     #[Validate('required|date|before_or_equal:today')]
     public string $birth_date = '';
 
-    #[Validate('required|min:5|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
+    #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
     public string $birth_town = '';
 
     #[Validate('required|min:1|max:2|regex:/^\S+$/')]
     public string $class = '';
 
-    #[Validate('required|min:5|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
+    #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
     public string $option = '';
 
-    #[Validate('required|min:5|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
+    #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
     public string $address = '';
 
     #[Validate('required|min:3|max:30|regex:/^\S+$/')]
@@ -57,7 +57,7 @@ class RegistrationCreate extends Component
     {
         $find = Student::count();
         $find2 = $find + 1;
-        $this->code = 'MAT'.$find2.'STU2025';
+        $this->code = 'MAT-'.$find2.'-STU-2025';
         return $this->code;
     }
 

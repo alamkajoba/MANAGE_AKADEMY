@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Module\Dashboard\Dashboard;
 use App\Livewire\Module\Fees\FeesCreate;
 use App\Livewire\Module\Fees\FeesIndex;
 use App\Livewire\Module\Payment\PaymentCreate;
@@ -26,6 +27,12 @@ Route::view('dashboard', 'dashboard')
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
+
+#dashboard
+Route::prefix('dashboard')->name('dashboard.')->group(function () {
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
+});
+
 
 #Registration route
 Route::prefix('registration')->name('registration.')->group(function () {
