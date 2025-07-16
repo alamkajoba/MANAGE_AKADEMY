@@ -1,7 +1,7 @@
 <div class="card shadow mb-4">
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
-                    <h3>AJOUTER UN FRAIS</h3>
+                    <h3>MODIFIER LE FRAIS : {{$feesId}}</h3>
                 </div> 
                 <div>
                     <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Liste la liste</a>
@@ -9,7 +9,7 @@
         </div>
         {{-- table --}}
         <div class="justify-content-between card-header">
-            <form wire:submit="save">
+            <form wire:submit="edit">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -20,10 +20,9 @@
                                 placeholder=""
                                 wire:model="name"
                             >
-                            <div>@error('name')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
+                             @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
 
                             <label for="">Description</label>
                             <input 
@@ -32,10 +31,6 @@
                                 placeholder=""
                                 wire:model="description"
                             >
-                            <div>@error('description')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
 
                             <label for="">Montant</label>
                             <input 
@@ -44,10 +39,6 @@
                                 placeholder=""
                                 wire:model="amount"
                             >
-                            <div>@error('amount')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
                         </div>
                     </div>
                     <div>

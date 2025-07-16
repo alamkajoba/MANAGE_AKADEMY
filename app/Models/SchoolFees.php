@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SchoolFees extends Model
+class Schoolfees extends Model
 {
-    protected $fillable = ['name'];
-
-    //RelationShips
+    protected $fillable = ['name','description','amount'];
 }
