@@ -5,7 +5,7 @@ namespace App\Livewire\Module\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
-#[Layout('layouts.app')]
+#[Layout('layouts.topadmin')]
 class UserIndex extends Component
 {
     public function render()

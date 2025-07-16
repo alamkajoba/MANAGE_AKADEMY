@@ -4,103 +4,128 @@
                     <h3>INSCRIPTION</h3>
                 </div> 
                 <div>
-                    {{-- <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Liste</a> --}}
-                    <button style="background-color: rgb(7, 7, 99)" class="btn text-white">
-                        Voir la liste
-                    </button>
+                    <a href="{{ route('registration.index')}}" style="background-color: rgb(7, 7, 99)" class="btn text-white">Voir la liste</a>
                 </div>
         </div>
         {{-- table --}}
         <div class="justify-content-between card-header">
-            <form>
+            <form wire:submit="submitStudent()">
+                @csrf
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="">Nom</label>
+                            <label for="middlename">Nom</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="middle_name"
                             >
 
-                            <label for="">Postnom</label>
+                            <label for="lastname">Postnom</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="last_name"
                             >
 
                             <label for="">Prénom</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="first_name"
                             >
 
                             <label for="">Genre</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
+                            <select wire:model="gender" class="form-control">
+                                <option>Selectionner...</option>
+                                @foreach ($this->genders() as $gender)
+                                    <option value="{{ $gender }}">{{ $gender }}</option>
+                                @endforeach
+                            </select>
 
                             <label for="">Date de naissance</label>
                             <input 
+                                required
                                 class="form-control"
-                                type="text"
+                                type="date"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="birth_date"
                             >
 
                             <label for="">Lieu de naissance</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="birth_town"
                             >
                         </div>
 
                         <div class="col-md-6">
-                            <label for="">Adresse</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
 
                             <label for="">Classe</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="class"
                             >
 
                             <label for="">Option</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="option"
+                            >
+
+                            <label for="">Adresse</label>
+                            <input 
+                                required
+                                class="form-control"
+                                type="text"
+                                placeholder=""
+                                wire:model="address"
+                            >
+
+                            <label for="">Nom Tuteur</label>
+                            <input 
+                                required
+                                class="form-control"
+                                type="text"
+                                placeholder=""
+                                wire:model="tutor_name"
                             >
 
                             <label for="">Numéro Tuteur</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="phone1"
+                            >
+
+                            <label for="">Numéro Tuteur 2</label>
+                            <input 
+                                class="form-control"
+                                type="text"
+                                placeholder=""
+                                wire:model="phone2"
                             >
                         </div>
                     </div>
                     <div>
-                        <button style="background-color: rgb(7, 7, 99)" class="btn text-white py-2 my-3">
+                        <button type="submit" style="background-color: rgb(7, 7, 99)" class="btn text-white py-2 my-3">
                             Valider
                         </button>
                     </div>

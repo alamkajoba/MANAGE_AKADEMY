@@ -71,7 +71,50 @@
                     </div>
                 </div>
             </li>
-                       
+                        
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div style="color:white;" class="sidebar-heading">
+                Interface
+            </div>
+
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+                    aria-expanded="true" aria-controls="collapseUsers">
+                    <i style="color:white;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color:white;">Gestion des utilisateurs</span>
+                </a>
+                <div id="collapseUsers" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Gestion des Utilisateurs:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('user.index')}}">Liste</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('user.create')}}">Ajouter</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFees"
+                    aria-expanded="true" aria-controls="collapseFees">
+                    <i style="color:white;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color:white;">Gestion des frais</span>
+                </a>
+                <div id="collapseFees" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Gestion des frais:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('fees.index')}}">Liste</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('fees.create')}}">Ajouter</a>
+                    </div>
+                </div>
+            </li>
+
+            
             {{-- <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
