@@ -2,11 +2,11 @@
 
     <!-- Header -->
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 class="m-0 font-weight-bold text-primary">LISTE DES ELEVES</h3>
+        <h3 >LISTE DES ELEVES</h3>
         <!-- Barre de recherche -->
         <div class="col-lg-4">
             <input 
-                wire:model.debounce.300ms="search" 
+                wire:model.live="search" 
                 type="text" 
                 class="form-control bg-light small"
                 placeholder="Taper un nom..."
@@ -41,18 +41,25 @@
                             <td>{{ $students->middle_name }}</td>
                             <td>{{ $students->last_name }}</td>
                             <td>{{ $students->code }}</td>
-                            <td>{{ $students->class }}</td>
-                            <td>{{ $students->option }}</td>
+                            @foreach ($students->enrollments as $enrollment)
+                                <td>
+                                    {{ $enrollment->level->class_name }} ème
+                                </td>
+                            @endforeach
+                            @foreach ($students->enrollments as $enrollment)
+                                <td>
+                                    {{ $enrollment->option->faculty_name }} 
+                                </td>
+                            @endforeach
                             <td>
                                 <a href="#" class="btn btn-info btn-sm" title="Voir les détails">Détails</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
+                                <a href="{{ route('registration.update', $students->id)}}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
                             </td>
                             <td>
                                 <button class="btn btn-danger btn-sm"
-                                        wire:click="deleteStudent({{ $students->id }})"
-                                        title="Supprimer l'étudiant">
+                                        wire:click="deleteStudent({{ $students->id }})">
                                         Supprimer
                                 </button>
                             </td>
@@ -71,47 +78,6 @@
             {{ $student->links() }}
         </div>
     </div>
-
-    {{-- @push('scripts')
-    <script>
-        document.addEventListener('livewire:init', () => {
-        Livewire.on('confirm', ({ title, text, id, method }) => {
-            console.log("Émission de l'événement :", method, id); 
-
-            Swal.fire({
-                title: title || 'Êtes-vous sûr ?',
-                text: text || '',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Oui, supprimer',
-                cancelButtonText: 'Annuler',
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#6c757d',
-            }).then((result) => {
-                if (result.isConfirmed && id && method) {
-                    window.Livewire.dispatch(method, id);
-
-                }
-            });
-        });
-
-        Livewire.on('toast', ({ type, message }) => {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: type || 'success',
-                title: message || '',
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true
-            });
-        });
-    });
-
-    </script>
-    @endpush --}}
-
-
 
 </div>
  

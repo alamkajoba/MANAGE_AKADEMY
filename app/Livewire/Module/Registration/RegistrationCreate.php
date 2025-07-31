@@ -1,8 +1,10 @@
 <?php
-
 namespace App\Livewire\Module\Registration;
 
 use App\Enums\GenderEnum;
+use App\Models\Enrollments;
+use App\Models\Level;
+use App\Models\Option;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -11,10 +13,8 @@ use Livewire\Attributes\Validate;
 #[Layout('layouts.app')]
 class RegistrationCreate extends Component
 {
-
+    // Champs liés à l'étudiant
     public $code;
-
-    #Rules validations
 
     #[Validate('required|min:3|max:30|regex:/^\S+$/')]
     public string $first_name = '';
@@ -34,11 +34,11 @@ class RegistrationCreate extends Component
     #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
     public string $birth_town = '';
 
-    #[Validate('required|min:1|max:2|regex:/^\S+$/')]
-    public string $class = '';
+    #[Validate('required|exists:levels,id')]
+    public $class;
 
-    #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
-    public string $option = '';
+    #[Validate('required|exists:options,id')]
+    public $option;
 
     #[Validate('required|min:3|max:100|regex:/^[\pL\pN\s,\.\-#\/]+$/u')]
     public string $address = '';
@@ -49,49 +49,48 @@ class RegistrationCreate extends Component
     #[Validate('required|regex:/^[0-9\s\-\+\(\)]+$/|min:8|max:20')]
     public string $phone1 = '';
 
-    #[Validate('regex:/^[0-9\s\-\+\(\)]+$/|min:8|max:20')]
+    #[Validate('nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:8|max:20')]
     public string $phone2 = '';
 
-    #Matricule
-    private function matriculeMaker()
+    // Données pour le formulaire
+    public $levels;
+    public $options;
+
+    // Génération du matricule
+    private function matriculeMaker(): string
     {
-        $find = Student::count();
-        $find2 = $find + 1;
-        $this->code = 'MAT-'.$find2.'-STU-2025';
-        return $this->code;
+        $count = Student::count() + 1;
+        return 'MAT-' . $count . '-STU-2025';
     }
 
-    #Data Student
-    private function dataStudent()
+    // Données à enregistrer pour Student
+    private function dataStudent(): array
     {
         return [
-            'first_name' => $this->first_name ,
-            'middle_name' => $this->middle_name ,
-            'last_name' => $this->last_name ,
-            'gender' => $this->gender ,
-            'birth_date' => $this->birth_date ,
-            'birth_town' => $this->birth_town ,
-            'address' => $this->address ,
-            'class' => $this->class ,
-            'option' => $this->option ,
-            'tutor_name' => $this->tutor_name ,
-            'phone1' => $this->phone1 ,
-            'phone2' => $this->phone2 ,
-            'code' => $this->matriculeMaker() ,
+            'first_name' => $this->first_name,
+            'middle_name' => $this->middle_name,
+            'last_name' => $this->last_name,
+            'gender' => $this->gender,
+            'birth_date' => $this->birth_date,
+            'birth_town' => $this->birth_town,
+            'address' => $this->address,
+            'tutor_name' => $this->tutor_name,
+            'phone1' => $this->phone1,
+            'phone2' => $this->phone2,
+            'code' => $this->matriculeMaker(),
         ];
     }
 
-    #Unique Stundent
-    private function uniqueStudent()
+    // Vérification d'unicité
+    private function uniqueStudent(): bool
     {
-        return Student::query()
-            ->where('first_name', $this->first_name)
+        return Student::where('first_name', $this->first_name)
             ->where('last_name', $this->last_name)
             ->where('birth_date', $this->birth_date)
             ->exists();
     }
 
-    #Create Student
+    // Enregistrement principal
     public function submitStudent()
     {
         $this->validate();
@@ -101,23 +100,36 @@ class RegistrationCreate extends Component
             return;
         }
 
-        // Creation du patient
-        $Student = Student::create($this->dataStudent());
+        $student = Student::create($this->dataStudent());
 
-        // Notification
-        $this->dispatch('notify', message: "L'élève a été inscrit avec succès", type: 'succès');
-        $this->redirect(route('registration.index'));
+        Enrollments::create([
+            'student_id' => $student->id,
+            'level_id' => (int)$this->class,
+            'option_id' => (int)$this->option,
+        ]);
+
+        session()->flash("success", "L'élève a été inscrit avec succès");
+        return redirect()->to(route('registration.index'));
     }
 
-    #Pull GenderEnum
+    // Enumération du genre
     private function genders(): array
     {
         return GenderEnum::cases();
     }
 
+    // Chargement des données pour les selects
+    public function mount()
+    {
+        $this->levels = Level::all();
+        $this->options = Option::all();
+    }
 
+    // Rendu du composant
     public function render()
     {
-        return view('livewire.module.registration.registration-create');
+        return view('livewire.module.registration.registration-create', [
+            'genders' => $this->genders(),
+        ]);
     }
 }

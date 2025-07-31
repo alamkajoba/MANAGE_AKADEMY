@@ -1,7 +1,7 @@
 <ul style="background-color: rgb(7, 7, 99)" class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.dashboard')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('registration.index')}}">
                 <div class="sidebar-brand-icon rotate-n-0">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
@@ -13,7 +13,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard.dashboard')}}">
+                <a class="nav-link" href="{{route('registration.index')}}">
                     <i style="color:white;" class="fas fa-fw fa-tachometer-alt"></i>
                     <span style="color:white;">Acceuil</span></a>
             </li>

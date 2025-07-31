@@ -1,7 +1,7 @@
 <ul style="background-color: rgb(7, 7, 99)" class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.dashboard')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('user.index')}}">
                 <div class="sidebar-brand-icon rotate-n-0">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
@@ -13,7 +13,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('dashboard.dashboard')}}">
+                <a class="nav-link" href="{{route('user.index')}}">
                     <i style="color:white;" class="fas fa-fw fa-tachometer-alt"></i>
                     <span style="color:white;">Acceuil</span></a>
             </li>
@@ -37,23 +37,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 style="color:black;" class="collapse-header">Gestion des élèves:</h6>
                         <a style="color:black;" class="collapse-item" href="{{route('registration.index')}}">Liste des élèves</a>
-                        <a style="color:black;" class="collapse-item" href="{{route('registration.create')}}">Inscription</a>
-                        <a style="color:black;" class="collapse-item" href="{{route('reregistration.create')}}">Reinscription</a>
-                    </div>
-                </div>
-            </li>
-
-            {{-- Billing manage --}}
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBilling"
-                    aria-expanded="true" aria-controls="collapseBilling">
-                    <i style="color:white;" class="fas fa-cog"></i>
-                    <span style="color:white;">Gestion des paiements</span>
-                </a>
-                <div id="collapseBilling" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 style="color:black;" class="collapse-header">Payements des frais:</h6>
-                        <a style="color:black;" class="collapse-item" href="{{route('payment.create')}}">Effectuer un paiement</a>
                     </div>
                 </div>
             </li>
@@ -110,6 +93,23 @@
                         <h6 style="color:black;" class="collapse-header">Gestion des frais:</h6>
                         <a style="color:black;" class="collapse-item" href="{{route('fees.index')}}">Liste</a>
                         <a style="color:black;" class="collapse-item" href="{{route('fees.create')}}">Ajouter</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClasses"
+                    aria-expanded="true" aria-controls="collapseClasses">
+                    <i style="color:white;" class="fas fa-fw fa-wrench"></i>
+                    <span style="color:white;">Gestion Année Scolaire</span>
+                </a>
+                <div id="collapseClasses" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Gestion :</h6>
+                        <a style="color:black;" class="collapse-item" href="">Année Scolaire</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('admin.classes')}}">Classes</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('admin.faculty')}}">Options</a>
                     </div>
                 </div>
             </li>
