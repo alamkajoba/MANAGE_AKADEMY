@@ -31,7 +31,7 @@
                         <th>Matricule</th>
                         <th>Classe</th>
                         <th>Option</th>
-                        <th colspan="3">Actions</th>
+                        <th colspan="2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,9 +51,6 @@
                                     {{ $enrollment->option->faculty_name }} 
                                 </td>
                             @endforeach
-                            <td>
-                                <a href="#" class="btn btn-info btn-sm" title="Voir les détails">Détails</a>
-                            </td>
                             <td>
                                 <a href="{{ route('registration.update', $students->id)}}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
                             </td>
