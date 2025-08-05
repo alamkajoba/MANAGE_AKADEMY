@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('classe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('academic_id')->constrained()->onDelete('cascade');
-            $table->foreignId('faculty_id')->constrained()->onDelete('cascade');
-            $table->string('enrollment_type');  //ENUM
-            $table->string('enrollment_status');  //ENUM :'pending', 'approved', 'rejected'
+            $table->foreignId('level_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('academic_id')->constrained()->onDelete('cascade');
+            $table->foreignId('option_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

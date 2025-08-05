@@ -20,4 +20,9 @@ class Student extends Model
         'gender' => GenderEnum::class,
     ];
     //RelationShips
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class);
+    }
 }
+

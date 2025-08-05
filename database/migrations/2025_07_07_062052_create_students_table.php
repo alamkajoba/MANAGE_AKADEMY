@@ -20,8 +20,6 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('birth_town');
             $table->string('gender', GenderEnum::values());
-            $table->string('class');
-            $table->string('option');
             $table->string('address');
             $table->string('tutor_name');
             $table->string('phone1');
