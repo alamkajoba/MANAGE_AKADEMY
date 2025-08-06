@@ -22,7 +22,7 @@ class Student extends Model
     //RelationShips
     public function enrollments()
     {
-        return $this->hasMany(Enrollments::class);
+        return $this->hasMany(Enrollment::class);
     }
 }
 

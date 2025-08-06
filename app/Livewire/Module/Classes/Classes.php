@@ -10,13 +10,14 @@ use Livewire\Attributes\Validate;
 #[Layout('layouts.topadmin')]
 class Classes extends Component
 {
-    #[Validate('required|unique:levels,class_name')]
+    #[Validate('required|unique:levels')]
     public string $class_name ;
 
     public function submitClass()
     {
         //Check if unique 
         $save = Level::create(['class_name' => $this->class_name]);
+        $this->reset();
     }
 
     //Delete class 

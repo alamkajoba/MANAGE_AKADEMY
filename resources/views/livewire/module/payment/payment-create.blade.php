@@ -12,7 +12,13 @@
         </div>
         {{-- table --}}
         <div class="justify-content-between card-header">
-            <form>
+            <form wire:submit="SavePayment">
+                @csrf
+                @if (session()->has('message'))
+                    <div class="alert alert-info">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -21,16 +27,50 @@
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="search"
+                                wire:keyup="searchStundent"
                             >
+
+                            @if (!empty($items_student))
+                                <ul class="list-group mt-2">
+                                    <h5>Resultat de la recherche :</h5>
+                                    @forelse ($items_student as $items_students)
+                                        <a href="" class="list-group-item mb-2 flex bg-primary-200 hover:bg-primary-500"
+                                            wire:click.prevent="selectStudent({{$items_students['id']}})">
+                                            {{ $items_students['first_name'].' '. $items_students['middle_name'].' '. $items_students['last_name'].' '.$items_students['code']}}
+                                        </a>
+                                    @empty
+                                        <div class="list-group-item mb-2 flex bg-danger-200">
+                                            Aucun(e) Etudiant(e)
+                                        </div>
+                                    @endforelse
+                                </ul>
+                            @endif
 
                             <label for="">Motif de paiement</label>
                             <input 
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model=""
+                                wire:model="fees"
+                                wire:keyup="searchFees"
                             >
+
+                            @if (!empty($items_fees))
+                                <ul class="list-group mt-2">
+                                    <h5>Resultat de la recherche :</h5>
+                                    @forelse ($items_fees as $items_feess)
+                                        <a href="" class="list-group-item mb-2 flex bg-primary-200 hover:bg-primary-500"
+                                            wire:click.prevent="selectFees({{$items_feess['id']}})">
+                                            {{ $items_feess['name'].' '. $items_feess['description'].' '.$items_feess['amount'].' Fc'}}
+                                        </a>
+                                    @empty
+                                        <div class="list-group-item mb-2 flex bg-danger-200">
+                                            Aucun(e) Etudiant(e)
+                                        </div>
+                                    @endforelse
+                                </ul>
+                            @endif
                         </div>
                     </div>
                     <div>

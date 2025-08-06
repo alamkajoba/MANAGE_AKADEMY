@@ -26,7 +26,7 @@ class ReRegistrationCreate extends Component
             ->toArray();
     }
 
-        //Selected patient
+        //Selected student
     public function selectStudent($itemId): void
     {
         // Sélectionne un élément

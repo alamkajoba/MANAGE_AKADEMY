@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Module\Fees;
 
+use App\Models\SchoolFee;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
-use App\Models\Schoolfees;
 
 #[Layout('layouts.topadmin')]
 class FeesCreate extends Component
@@ -19,12 +19,12 @@ class FeesCreate extends Component
     }
     public function save(){
         $validated= $this->validate([
-            'name'=>'required|unique:schoolfees|max:255',
-            'description'=>'required|unique:schoolfees|max:255',
+            'name'=>'required|unique:school_fees|max:255',
+            'description'=>'required|max:255',
             'amount'=>'required',
         ]);
-        $this->validate = Schoolfees::where('id', $this->name, $this->description)->exists();
-        Schoolfees::create($validated);
+        $this->validate = SchoolFee::where('id', $this->name, $this->description)->exists();
+        SchoolFee::create($validated);
         session()->flash('message', 'Frais enregistrés avec succès !');
         $this->reset();
     }

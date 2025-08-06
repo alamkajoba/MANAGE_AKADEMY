@@ -20,6 +20,7 @@ class Faculty extends Component
 
         //Check if unique 
         $save = Option::create(['faculty_name' => $this->option_name]);
+        $this->reset();
     }
 
     public function destroyOption($id)
