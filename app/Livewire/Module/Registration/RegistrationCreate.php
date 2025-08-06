@@ -2,7 +2,7 @@
 namespace App\Livewire\Module\Registration;
 
 use App\Enums\GenderEnum;
-use App\Models\Enrollments;
+use App\Models\Enrollment;
 use App\Models\Level;
 use App\Models\Option;
 use App\Models\Student;
@@ -102,7 +102,7 @@ class RegistrationCreate extends Component
 
         $student = Student::create($this->dataStudent());
 
-        Enrollments::create([
+        Enrollment::create([
             'student_id' => $student->id,
             'level_id' => (int)$this->class,
             'option_id' => (int)$this->option,

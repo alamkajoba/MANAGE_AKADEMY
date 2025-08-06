@@ -11,6 +11,6 @@ class Level extends Model
     //RelationShip
     public function enrollments()
     {
-        return $this->hasMany(Enrollments::class);
+        return $this->hasMany(Enrollment::class);
     }
 }
