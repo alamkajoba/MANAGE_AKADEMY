@@ -10,6 +10,7 @@ use App\Livewire\Module\Recovery\RecoveryCreate;
 use App\Livewire\Module\Recovery\RecoveryPrint;
 use App\Livewire\Module\Registration\RegistrationCreate;
 use App\Livewire\Module\Registration\RegistrationIndex;
+use App\Livewire\Module\Registration\RegistrationIndexAdmin;
 use App\Livewire\Module\Registration\RegistrationUpdate;
 use App\Livewire\Module\ReRegistration\ReRegistrationCreate;
 use App\Livewire\Module\User\UserCreate;
@@ -27,6 +28,7 @@ Route::view('profile', 'profile')
 #Registration route
 Route::middleware('auth')->prefix('registration')->name('registration.')->group(function () {
     Route::get('index', RegistrationIndex::class)->name('index');
+    Route::get('indexadmin', RegistrationIndexAdmin::class)->name('indexadmin');
     Route::get('create', RegistrationCreate::class)->name('create');
     Route::get('reregistrationupdate/{id}', RegistrationUpdate::class)->name('update');
 });
