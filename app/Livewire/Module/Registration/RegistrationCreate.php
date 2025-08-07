@@ -108,7 +108,7 @@ class RegistrationCreate extends Component
             'option_id' => (int)$this->option,
         ]);
 
-        session()->flash("success", "L'élève a été inscrit avec succès");
+        session()->flash('success', 'Etudiant créé avec succès.');
         return redirect()->to(route('registration.index'));
     }
 

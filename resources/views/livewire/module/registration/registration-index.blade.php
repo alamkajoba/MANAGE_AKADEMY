@@ -1,5 +1,19 @@
 <div class="card shadow mb-4">
+    {{-- @if (session()->has('success'))
+        <div id="alert-success" class="alert alert-success mt-3 text-white" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif --}}
 
+    @if (session()->has('success'))
+        <div id="alert-success" 
+            class="alert alert-success fade show text-center"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('success') }}
+        </div>
+    @endif
     <!-- Header -->
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h3 >LISTE DES ELEVES</h3>
@@ -17,9 +31,6 @@
 
     <!-- Table -->
     <div class="card-body">
-        @if (session()->has('message'))
-            <div class="alert alert-success">{{ session('message') }}</div>
-        @endif
 
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%">
@@ -77,4 +88,18 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('alert-success');
+        if (alert) {
+            setTimeout(() => {
+                alert.classList.remove('show'); // déclenche l'animation fade
+                setTimeout(() => {
+                    alert.remove(); // supprime l'élément du DOM
+                }, 500); // attendre l'animation
+            }, 5000); // visible secondes
+        }
+    });
+</script>
  
