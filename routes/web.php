@@ -10,10 +10,12 @@ use App\Livewire\Module\Recovery\RecoveryCreate;
 use App\Livewire\Module\Recovery\RecoveryPrint;
 use App\Livewire\Module\Registration\RegistrationCreate;
 use App\Livewire\Module\Registration\RegistrationIndex;
+use App\Livewire\Module\Registration\RegistrationIndexAdmin;
 use App\Livewire\Module\Registration\RegistrationUpdate;
 use App\Livewire\Module\ReRegistration\ReRegistrationCreate;
 use App\Livewire\Module\User\UserCreate;
 use App\Livewire\Module\User\UserIndex;
+use App\Livewire\Module\User\UserUpdate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +29,7 @@ Route::view('profile', 'profile')
 #Registration route
 Route::middleware('auth')->prefix('registration')->name('registration.')->group(function () {
     Route::get('index', RegistrationIndex::class)->name('index');
+    Route::get('indexadmin', RegistrationIndexAdmin::class)->name('indexadmin');
     Route::get('create', RegistrationCreate::class)->name('create');
     Route::get('reregistrationupdate/{id}', RegistrationUpdate::class)->name('update');
 });
@@ -34,7 +37,7 @@ Route::middleware('auth')->prefix('registration')->name('registration.')->group(
 #classes Faculty Academic route
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('faculty', Faculty::class)->name('faculty');
-    // Route::get('academic', RegistrationCreate::class)->name('academic');
+// Route::get('academic', RegistrationCreate::class)->name('academic');
     Route::get('classes', Classes::class)->name('classes');
 });
 
@@ -67,6 +70,7 @@ Route::middleware('auth')->prefix('recovery')->name('recovery.')->group(function
 Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('usercreate', UserCreate::class)->name('create');
     Route::get('userindex', UserIndex::class)->name('index');
+    Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
 });
 
 require __DIR__.'/auth.php';

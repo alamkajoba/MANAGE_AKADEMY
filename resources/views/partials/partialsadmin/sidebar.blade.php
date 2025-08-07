@@ -36,7 +36,7 @@
                 <div id="collapseregistration" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 style="color:black;" class="collapse-header">Gestion des élèves:</h6>
-                        <a style="color:black;" class="collapse-item" href="{{route('registration.index')}}">Liste des élèves</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('registration.indexadmin')}}">Liste des élèves</a>
                     </div>
                 </div>
             </li>

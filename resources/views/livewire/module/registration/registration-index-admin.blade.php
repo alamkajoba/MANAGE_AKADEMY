@@ -1,14 +1,4 @@
 <div class="card shadow mb-4">
-
-    @if (session()->has('success'))
-        <div id="alert-success" 
-            class="alert alert-success fade show text-center"
-            role="alert"
-            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                    z-index: 9999; width: fit-content; min-width: 500px;">
-            {{ session('success') }}
-        </div>
-    @endif
     <!-- Header -->
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h3 >LISTE DES ELEVES</h3>
@@ -37,7 +27,6 @@
                         <th>Matricule</th>
                         <th>Classe</th>
                         <th>Option</th>
-                        <th colspan="2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,19 +46,10 @@
                                     {{ $enrollment->option->faculty_name }} 
                                 </td>
                             @endforeach
-                            <td>
-                                <a href="{{ route('registration.update', $students->id)}}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm"
-                                        wire:click="deleteStudent({{ $students->id }})">
-                                        Supprimer
-                                </button>
-                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="text-center text-danger">Oups! Aucun étudiant trouvé.</td>
+                            <td colspan="6" class="text-center text-danger">Oups! Aucun étudiant trouvé.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -83,17 +63,4 @@
     </div>
 
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const alert = document.getElementById('alert-success');
-        if (alert) {
-            setTimeout(() => {
-                alert.classList.remove('show'); // commence la disparition
-                setTimeout(() => {
-                    alert.remove(); // supprime du DOM après l'animation
-                }, 500); // temps pour le fade-out
-            }, 5000); // affichée pendant 3 secondes
-        }
-    });
-</script>
+ 

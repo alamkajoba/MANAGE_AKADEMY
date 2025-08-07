@@ -49,7 +49,7 @@ class RegistrationUpdate extends Component
         $this->validate();
         $check = Student::findOrFail($id);
 
-        $check::update(
+        $check->update(
         [
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,
@@ -62,7 +62,7 @@ class RegistrationUpdate extends Component
             'phone1' => $this->phone1,
             'phone2' => $this->phone2,
         ]);
-        session()->flash("success", "L'élève a été inscrit avec succès");
+        session()->flash('success', "L'Etudiant a été modifié avec succès.");
         return redirect()->to(route('registration.index'));
 
     }
