@@ -15,6 +15,7 @@ use App\Livewire\Module\Registration\RegistrationUpdate;
 use App\Livewire\Module\ReRegistration\ReRegistrationCreate;
 use App\Livewire\Module\User\UserCreate;
 use App\Livewire\Module\User\UserIndex;
+use App\Livewire\Module\User\UserUpdate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -69,6 +70,7 @@ Route::middleware('auth')->prefix('recovery')->name('recovery.')->group(function
 Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('usercreate', UserCreate::class)->name('create');
     Route::get('userindex', UserIndex::class)->name('index');
+    Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
 });
 
 require __DIR__.'/auth.php';

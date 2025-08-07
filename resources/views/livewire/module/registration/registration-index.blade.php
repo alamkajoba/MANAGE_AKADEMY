@@ -89,12 +89,11 @@
         const alert = document.getElementById('alert-success');
         if (alert) {
             setTimeout(() => {
-                alert.classList.remove('show'); // déclenche l'animation fade
+                alert.classList.remove('show'); // commence la disparition
                 setTimeout(() => {
-                    alert.remove(); // supprime l'élément du DOM
-                }, 500); // attendre l'animation
-            }, 5000); // visible secondes
+                    alert.remove(); // supprime du DOM après l'animation
+                }, 500); // temps pour le fade-out
+            }, 5000); // affichée pendant 3 secondes
         }
     });
 </script>
- 

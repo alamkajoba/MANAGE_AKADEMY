@@ -1,4 +1,13 @@
 <div class="card shadow mb-4">
+    @if (session()->has('success'))
+        <div id="alert-success" 
+            class="alert alert-success fade show text-center shadow-lg"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="justify-content-between card-header py-3 d-flex">
         <form method="GET"
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -45,7 +54,7 @@
                             </td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                <a href="#" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
+                                <a href="{{ route('user.userupdate', $users->id)}}" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
                             </td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
@@ -69,3 +78,16 @@
             </div>
     </div>  
 </div>  
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('alert-success');
+        if (alert) {
+            setTimeout(() => {
+                alert.classList.remove('show'); // commence la disparition
+                setTimeout(() => {
+                    alert.remove(); // supprime du DOM après l'animation
+                }, 500); // temps pour le fade-out
+            }, 5000); // affichée pendant 3 secondes
+        }
+    });
+</script>
