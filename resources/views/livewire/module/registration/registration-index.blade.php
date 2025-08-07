@@ -1,9 +1,4 @@
 <div class="card shadow mb-4">
-    {{-- @if (session()->has('success'))
-        <div id="alert-success" class="alert alert-success mt-3 text-white" role="alert">
-            {{ session('success') }}
-        </div>
-    @endif --}}
 
     @if (session()->has('success'))
         <div id="alert-success" 

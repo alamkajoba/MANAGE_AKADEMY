@@ -36,6 +36,7 @@ class RegistrationIndex extends Component
     {
         $student = Student::find($id);
         $student->delete();
+        session()->flash('success', "L'étudiant a été supprimé avec succès.");
     }
 
     public function render()
