@@ -28,19 +28,17 @@
                         <th>Nom</th>
                         <th>Postnom</th>
                         <th>Prénom</th>
-                        <th>Matricule</th>
                         <th>Fonction</th>
                         <th colspan="3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($products as $product) --}}
+                    @forelse ($user as $users)
                         <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>Mac</td>
-                            <td>HK231FL</td>
-                            <td>Caisse 1</td>
+                            <td>{{ $users->middle_name }}</td>
+                            <td>{{ $users->last_name }}</td>
+                            <td>{{ $users->first_name }}</td>
+                            <td>{{ $users->function }} 1</td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                 <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
@@ -54,20 +52,20 @@
                                 <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
                             </td>
                         </tr>
-                    {{-- @empty
+                    @empty
                         <tr>
                             <td colspan="5" class="px-6 py-2.5 text-danger whitespace-nowrap text">
                                 Oups! Aucun Produit trouvé.
                             </td>
                         </tr>
-                    @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
 
         </div>  
         {{-- paginate --}}
             <div class="mt-4">
-                {{-- {{$products->links()}} --}}
+                {{$user->links()}}
             </div>
     </div>  
 </div>  
