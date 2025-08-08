@@ -6,43 +6,86 @@
                 <div>
                     <button style="background-color: rgb(7, 7, 99)" class="btn text-white fa fa-print">Imprimer</button>
                 </div>
+                
+    
         </div>
+
+        
         {{-- table --}}
         <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100px" cellspacing="0">
                 {{-- searchfilter --}}
-                <div class="input-group col-lg-4 my-3">
-                    <input 
-                        wire:model.live.debounce.100ms="search" 
-                        type="text" 
-                        class="form-control bg-light small" 
-                        placeholder="Taper un nom..."
-                    />
-                </div>
-                
+               <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="middlename">Mois</label>
+                           <select 
+                                required
+                                    class="form-control"
+                                    type="text"
+                                    placeholder=""
+                                    wire:model.live="selectedMonth">
+                                <option>Selectionner le mois</option>
+                                @foreach ($feeses as $fees)
+                                    <option value="{{ $fees->id }}">{{$fees->name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                         <label for="">Classe</label>
+                            <select 
+                                required
+                                    class="form-control"
+                                    type="text"
+                                    placeholder=""
+                                    wire:model.live="selectedClass">
+                                <option>Selectionner une classe</option>
+                                @foreach ($levels as $level)
+                                    <option value="{{ $level->id }}">{{$level->class_name}} ème</option>
+                                @endforeach
+                            </select>
+                        </div>     
+                         <div class="col-md-4">
+                           <label for="">Option</label>
+                            <select 
+                                required
+                                    class="form-control"
+                                    type="text"
+                                    placeholder=""
+                                    wire:model.live="selectedOption">
+                                <option>Selectionner une option</option>
+                                @foreach ($options as $option)
+                                    <option value="{{ $option->id }}">{{$option->faculty_name}}</option>
+                                @endforeach
+                            </select>           
                     
                 <thead>
-                    <tr><td colspan="4">Liste des etudiants en ordre avec .............</td></tr>
+                    <tr><td colspan="4">Liste des etudiants en ordre avec le mois de  {{$selectedMonth}} </td></tr>
                     <tr style="background-color: rgb(7, 7, 99)" class="text-white">
                         <th>Nom</th>
                         <th>Postnom</th>
                         <th>Prénom</th>
-                        <th>Matricule</th>
+                        <th>Classe</th>
+                        <th>Option</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($recovery as $recoveries)
+                    @forelse ($students as $enrollment)
                         <tr>
-                            <td>{{$recoveries->id}}</td>
-                            <td>{{$recoveries->enrollment_id}}</td>
-                            <td>{{$recoveries->fees_id}}</td>
-                            <td>HUYHGIUOUB</td>
+                            <td>{{$enrollment->student?->first_name ?? '-'}}</td>
+                            <td>{{$enrollment->student?->middle_name ?? '-'}}</td>
+                             <td>{{$enrollment->student?->last_name ?? '-'}}</td>
+                             <td>{{$enrollment->level?->class_name ?? '-' }} eme</td>
+                            <td>{{$enrollment->option?->faculty_name ?? '-' }}</td>
+                      
+              
                         </tr>
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-2.5 text-danger whitespace-nowrap text">
-                                Oups! Aucun Produit trouvé.
+                                Oups! Aucun Eleve trouvé.
                             </td>
                         </tr>
                     @endforelse
@@ -55,4 +98,5 @@
                 {{-- {{$products->links()}} --}}
             </div>
     </div>  
+    
 </div> 

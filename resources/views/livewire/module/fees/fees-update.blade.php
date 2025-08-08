@@ -9,10 +9,17 @@
         </div>
         {{-- table --}}
         <div class="justify-content-between card-header">
-            <form wire:submit="edit">
+            <form wire:submit="editFees">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
+                             <!-- <label for="">id</label>
+                            <input 
+                                class="form-control"
+                                type="text"
+                                placeholder=""
+                                wire:model="feesId"
+                            > -->
                             <label for="">Nom du frais</label>
                             <input 
                                 class="form-control"
@@ -42,7 +49,7 @@
                         </div>
                     </div>
                     <div>
-                        <button style="background-color: rgb(7, 7, 99)" class="btn text-white py-2 my-3">
+                        <button type="submit" style="background-color: rgb(7, 7, 99)" class="btn text-white py-2 my-3">
                             Valider
                         </button>
                     </div>

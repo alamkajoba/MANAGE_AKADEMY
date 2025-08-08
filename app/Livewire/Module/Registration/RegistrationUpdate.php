@@ -49,7 +49,7 @@ class RegistrationUpdate extends Component
         $this->validate();
         $check = Student::findOrFail($id);
 
-        $check::update(
+        $check->update(
         [
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,

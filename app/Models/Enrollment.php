@@ -23,4 +23,9 @@ class Enrollment extends Model
     {
         return $this->belongsTo(Option::class);
     }
+    public function payments()
+    {
+    return $this->hasMany(Payment::class, 'enrollment_id');
+    }
+
 }

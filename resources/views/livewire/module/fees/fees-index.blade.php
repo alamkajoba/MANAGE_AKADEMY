@@ -55,6 +55,7 @@
                             
                         <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nom</th>
                             <th>Description</th>
                             <th>Montant</th>
@@ -65,6 +66,7 @@
                     <tbody>
                         @foreach ($fees as $fes)
                             <tr>
+                                <td>{{$fes->id}}</td>
                                 <td>{{$fes->name}}</td>
                                 <td>{{$fes->description}}</td>
                                 <td>{{$fes->amount}}</td>

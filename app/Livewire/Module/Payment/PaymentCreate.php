@@ -16,6 +16,7 @@ class PaymentCreate extends Component
     public $search = '';
     public $items_student = [];
     public $selected_student = [null];
+    
 
     //Var for auto complete student
     public $fees = '';
