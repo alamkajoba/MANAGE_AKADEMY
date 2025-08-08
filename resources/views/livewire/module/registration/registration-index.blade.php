@@ -1,18 +1,20 @@
 <div class="card shadow mb-4">
 
+    <!-- Notification flash -->
+
     @if (session()->has('success'))
         <div id="alert-success" 
-            class="alert alert-success fade show text-center"
+            class="alert alert-success fade show text-center shadow-lg"
             role="alert"
             style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
                     z-index: 9999; width: fit-content; min-width: 500px;">
             {{ session('success') }}
         </div>
     @endif
+
     <!-- Header -->
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <h3 >LISTE DES ELEVES</h3>
-        <!-- Barre de recherche -->
+        <h3>LISTE DES ELEVES</h3>
         <div class="col-lg-4">
             <input 
                 wire:model.live="search" 
@@ -26,7 +28,6 @@
 
     <!-- Table -->
     <div class="card-body">
-
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%">
                 <thead style="background-color: rgb(7, 7, 99)" class="text-white">
@@ -48,22 +49,22 @@
                             <td>{{ $students->last_name }}</td>
                             <td>{{ $students->code }}</td>
                             @foreach ($students->enrollments as $enrollment)
-                                <td>
-                                    {{ $enrollment->level->class_name }} ème
-                                </td>
+                                <td>{{ $enrollment->level->class_name }} ème</td>
                             @endforeach
                             @foreach ($students->enrollments as $enrollment)
-                                <td>
-                                    {{ $enrollment->option->faculty_name }} 
-                                </td>
+                                <td>{{ $enrollment->option->faculty_name }}</td>
                             @endforeach
                             <td>
-                                <a href="{{ route('registration.update', $students->id)}}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
+                                <a href="{{ route('registration.update', $students->id) }}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm"
-                                        wire:click="deleteStudent({{ $students->id }})">
-                                        Supprimer
+                                <button class="btn btn-danger btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#exampleModal" 
+                                    wire:click="setStudentId({{ $students->id }})"
+                                    >
+                                    
+                                    Supprimer
                                 </button>
                             </td>
                         </tr>
@@ -80,8 +81,29 @@
         <div class="mt-4">
             {{ $student->links() }}
         </div>
-    </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-0">
+                    <div style="background-color: rgb(7, 7, 99)" class="modal-header text-white rounded-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression d'un Etudiant</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        Cette action est irréversible pour l'étudiant 
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                       
+                        <button wire:click="destroyStudent()" style="background-color: rgb(7, 7, 99)" class="btn text-white" data-bs-dismiss="modal">Confirmer</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ModalEnd -->
+    </div>
 </div>
 
 <script>
@@ -96,4 +118,18 @@
             }, 5000); // affichée pendant 3 secondes
         }
     });
+
+    // Au chargement du DOM
+    document.addEventListener('DOMContentLoaded', function () {
+        var exampleModal = document.getElementById('exampleModal');
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // bouton qui ouvre le modal
+            var studentId = button.getAttribute('data-id'); // récupère l'ID
+
+            // Affiche l'ID dans le modal
+            var spanId = exampleModal.querySelector('#studentIdToDelete');
+            spanId.textContent = studentId;
+        });
+    });
 </script>
+

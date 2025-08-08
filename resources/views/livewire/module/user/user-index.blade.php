@@ -24,7 +24,7 @@
                 {{-- searchfilter --}}
                 <div class="input-group col-lg-4 my-3">
                     <input 
-                        wire:model.live.debounce.100ms="search" 
+                        wire:model.live="search" 
                         type="text" 
                         class="form-control bg-light small" 
                         placeholder="Taper un nom..."
@@ -50,7 +50,7 @@
                             <td>{{ $users->function }}</td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
+                                <a data-bs-toggle="modal" data-bs-target="#detailModal" wire:click="detailUser({{$users->id}})"   href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
                             </td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
@@ -58,7 +58,14 @@
                             </td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                <button wire:click.prevent="destroyUser({{$users->id}})" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</button>
+                                <button class="btn btn-danger btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#exampleModal" 
+                                    wire:click="setUserId({{ $users->id }})"
+                                    >
+                                    
+                                    Supprimer
+                                </button>
                             </td>
                         </tr>
                     @empty
@@ -73,9 +80,54 @@
 
         </div>  
         {{-- paginate --}}
-            <div class="mt-4">
-                {{$user->links()}}
+        <div class="mt-4">
+            {{$user->links()}}
+        </div>
+
+        <!-- Modal Delete -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-0">
+                    <div style="background-color: rgb(7, 7, 99)" class="modal-header text-white rounded-0">
+                        <h5 class="modal-title" id="exampleModalLabel">Suppression d'un Utilisateur</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        Cette action est irréversible pour l'Utilisateur 
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button wire:click="destroyUser()" style="background-color: rgb(7, 7, 99)" class="btn text-white" data-bs-dismiss="modal">Confirmer</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <!-- ModalEnd -->
+
+
+        <!-- Modal Details -->
+        <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-0">
+                    <div style="background-color: rgb(7, 7, 99)" class="modal-header text-white rounded-0">
+                        <h5 class="modal-title" id="detailModalLabel">Details sur {{$middle_name}}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Agent: <strong>{{$first_name}} {{$middle_name}} {{$last_name}}</strong></p>
+                        <p>Fonction: <strong>{{$functionUser}}</strong></p>
+                        <p>Membre depuis: <strong>{{$createUser}}</strong></p>
+                        <p>Role dans le systeme: <strong>{{$roleUser}}</strong></p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button wire:click="destroyUser()" style="background-color: rgb(7, 7, 99)" class="btn text-white" data-bs-dismiss="modal">Modifier</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ModalEnd -->
+
     </div>  
 </div>  
 <script>
@@ -89,5 +141,18 @@
                 }, 500); // temps pour le fade-out
             }, 5000); // affichée pendant 3 secondes
         }
+    });
+
+    // Au chargement du DOM
+    document.addEventListener('DOMContentLoaded', function () {
+        var exampleModal = document.getElementById('exampleModal');
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // bouton qui ouvre le modal
+            var UserId = button.getAttribute('data-id'); // récupère l'ID
+
+            // Affiche l'ID dans le modal
+            var spanId = exampleModal.querySelector('#UserIdToDelete');
+            spanId.textContent = UserId;
+        });
     });
 </script>
