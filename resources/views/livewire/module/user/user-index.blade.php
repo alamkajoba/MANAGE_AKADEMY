@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                <a href="#" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</a>
+                                <button wire:click.prevent="destroyUser({{$users->id}})" style="background-color: rgb(219, 65, 65)" class="btn text-white">Supprimer</button>
                             </td>
                         </tr>
                     @empty
