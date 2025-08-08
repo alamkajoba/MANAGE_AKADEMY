@@ -25,6 +25,15 @@ class UserIndex extends Component
     {
         $this->resetPage();
     }
+
+    public function destroyUser($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        session()->flash('success', "L'utilisateur a été supprimé avec succès.");
+
+        return redirect()->to(route('user.index'));
+    }
     public function render()
     {
 
