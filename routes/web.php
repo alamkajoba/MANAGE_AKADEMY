@@ -73,4 +73,10 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
 });
 
+
+//Test error
+Route::get('/error', function(){
+    abort(419);
+});
+
 require __DIR__.'/auth.php';

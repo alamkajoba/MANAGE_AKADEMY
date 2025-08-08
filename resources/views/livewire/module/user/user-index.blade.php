@@ -47,7 +47,7 @@
                             <td>{{ $users->middle_name }}</td>
                             <td>{{ $users->last_name }}</td>
                             <td>{{ $users->first_name }}</td>
-                            <td>{{ $users->function }} 1</td>
+                            <td>{{ $users->function }}</td>
                             <td>
                                 {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                 <a href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
