@@ -11,11 +11,11 @@ class Payment extends Model
     //RelationShips
     public function enrollment()
     {
-        return $this->hasMany(Enrollment::class);
+         return $this->belongsTo(Enrollment::class, 'enrollment_id');
     }
 
     public function fees()
     {
-        return $this->belongsTo(SchoolFee::class);
+        return $this->belongsTo(SchoolFee::class, 'school_fees_id');
     }
 }
