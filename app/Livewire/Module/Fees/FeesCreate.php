@@ -25,8 +25,8 @@ class FeesCreate extends Component
         ]);
         $this->validate = SchoolFee::where('id', $this->name, $this->description)->exists();
         SchoolFee::create($validated);
-        session()->flash('message', 'Frais enregistrés avec succès !');
-        $this->reset();
+        session()->flash('success', "Le frais a été créé avec succès.");
+        return redirect()->to(route('fees.index'));
     }
  
     

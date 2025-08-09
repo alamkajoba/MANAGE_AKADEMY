@@ -39,8 +39,8 @@ class FeesUpdate extends Component
             'description'=>$this->description,
             'amount'=>$this->amount,
     ]);
-      session()->flash('success','Frais modifié');
-      $this->reset();
+     session()->flash('success', "Le frais a été modifié avec succès.");
+        return redirect()->to(route('fees.index'));
       
     }
   
