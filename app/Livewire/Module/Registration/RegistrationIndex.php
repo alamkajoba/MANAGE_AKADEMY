@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Module\Registration;
 
-use App\Models\Enrollments;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -21,9 +20,12 @@ class RegistrationIndex extends Component
     #[Url(as: 'q')]
     public ?string $search = '';
 
+    public $studentIdToDelete = '';
+
     protected $listeners = [
-        'deleteStudent' => 'deleteStudent',
+        'setStudentId',
     ];
+
     /**
      * Réinitialiser la pagination sur recherche
      */
@@ -32,26 +34,31 @@ class RegistrationIndex extends Component
         $this->resetPage();
     }
 
-    public function deleteStudent($id)
+    // Reçoit l'ID envoyé par JS à l'ouverture du modal
+    public function setStudentId($id)
     {
-        $student = Student::find($id);
+        $this->studentIdToDelete = $id;
+    }
+
+    public function destroyStudent()
+    {
+        $student = Student::findOrFail($this->studentIdToDelete);
         $student->delete();
-        session()->flash('success', "L'étudiant a été supprimé avec succès.");
-        return redirect()->to(route('registration.registration-index'));
+        session()->flash('success', "L'Etudiant a été supprimé avec succès.");
+        return redirect()->to(route('registration.index'));
     }
 
     public function render()
     {
-        $query = Student::with(['enrollments.level', 'enrollments.option']) // 
-        ->where(function ($q) {
-            $q->where('first_name', 'like', '%' . $this->search . '%')
-            ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-            ->orWhere('last_name', 'like', '%' . $this->search . '%');
-        });
+        $query = Student::with(['enrollments.level', 'enrollments.option'])
+            ->where(function ($q) {
+                $q->where('first_name', 'like', '%' . $this->search . '%')
+                  ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+                  ->orWhere('last_name', 'like', '%' . $this->search . '%');
+            });
 
         return view('livewire.module.registration.registration-index', [
             'student' => $query->latest()->paginate(5),
         ]);
     }
-
 }
