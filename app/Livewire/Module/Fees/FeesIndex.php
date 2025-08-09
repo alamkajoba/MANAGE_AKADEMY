@@ -16,8 +16,8 @@ class FeesIndex extends Component
     }
     public function deletefees(SchoolFee $schoolfess){
         $schoolfess->delete();
-        session()->flash('success', 'Frais supprimé');
-        return view('livewire.module.fees.fees-index');
+      session()->flash('success', "Le frais a été supprimé avec succès.");
+        return redirect()->to(route('fees.index'));
 
     }
 

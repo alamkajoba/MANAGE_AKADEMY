@@ -68,6 +68,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 style="color:black;" class="collapse-header">Recouvrements:</h6>
                         <a style="color:black;" class="collapse-item" href="{{route('recovery.create')}}">Imprimer les listes</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('recovery.print')}}">listes des eleves en ordre</a>
                     </div>
                 </div>
             </li>

@@ -4,8 +4,38 @@
                     <h3>FILTRE DE RECOUVREMENT</h3>
                 </div> 
                 <div>
-                    <button style="background-color: rgb(7, 7, 99)" class="btn text-white fa fa-print">Imprimer</button>
+                    
                 </div>
+                <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #print-section,
+            #print-section * {
+                visibility: visible;
+            }
+
+            #print-section {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+     @push('scripts')
+        <script>
+            window.addEventListener('trigger-print', function () {
+                window.print();
+            });
+        </script>
+    @endpush
                 
     
         </div>
@@ -13,10 +43,7 @@
         
         {{-- table --}}
         <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100px" cellspacing="0">
-                {{-- searchfilter --}}
-               <div class="container">
+        <div class="container">
                     <div class="row">
                         <div class="col-md-4">
                             <label for="middlename">Mois</label>
@@ -59,16 +86,26 @@
                                 @foreach ($options as $option)
                                     <option value="{{ $option->id }}">{{$option->faculty_name}}</option>
                                 @endforeach
-                            </select>           
-                    
-                <thead>
-                    <tr><td colspan="4">Liste des etudiants en ordre avec le mois de  {{$selectedMonth}} </td></tr>
+                            </select> </div>
+                              <div class="card-body">
+                 <div class="container">
+                    <div class="row">   
+                          
+        <div  id="print-section" class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100px" cellspacing="0">
+                {{-- searchfilter --}}
+               
+                  
+                <thead >
+                    Liste des etudiants en ordre avec le mois de  {{$selectedMonth}} 
+                    <tr><td colspan="4"></td></tr>
                     <tr style="background-color: rgb(7, 7, 99)" class="text-white">
                         <th>Nom</th>
                         <th>Postnom</th>
                         <th>Prénom</th>
                         <th>Classe</th>
                         <th>Option</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,6 +116,7 @@
                              <td>{{$enrollment->student?->last_name ?? '-'}}</td>
                              <td>{{$enrollment->level?->class_name ?? '-' }} eme</td>
                             <td>{{$enrollment->option?->faculty_name ?? '-' }}</td>
+                            <td><button onclick="window.print()" style="background-color: rgb(7, 7, 99)" class="btn text-white fa fa-print">Imprimer</button></td>
                       
               
                         </tr>
