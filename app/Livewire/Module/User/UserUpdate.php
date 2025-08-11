@@ -4,6 +4,7 @@ namespace App\Livewire\Module\User;
 
 use App\Enums\UserRoleEnum;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
@@ -30,7 +31,7 @@ class UserUpdate extends Component
         $this->last_name = $user->last_name;
         $this->function = $user->function;
         $this->email = $user->email;
-        $this->password = $user->password;
+        // $this->password = $user->password;
         $this->role = $user->role;
     }
 
@@ -44,8 +45,14 @@ class UserUpdate extends Component
             'role' => ['required', 'string', 'max:255'],
             'function' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
-            'password' => ['required', 'string'],
+            'password' => 'nullable|min:6|confirmed',
         ]);
+            // Hasher seulement si un mot de passe a été envoyé
+        if (!empty($user['password'])) {
+            $user['password'] = Hash::make($user['password']);
+        } else {
+            unset($user['password']); // éviter de remplacer par null
+        }
         $update = $user->update($validated);
         session()->flash('success', "L'utilisateur a été modifié avec succès.");
         return redirect()->to(route('user.index'));
@@ -59,5 +66,5 @@ class UserUpdate extends Component
     public function render()
     {
         return view('livewire.module.user.user-update');
-    }
+    } 
 }

@@ -52,8 +52,9 @@
                 </a>
                 <div id="collapseBilling" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 style="color:black;" class="collapse-header">Payements des frais:</h6>
+                        <h6 style="color:black;" class="collapse-header">Payement des frais:</h6>
                         <a style="color:black;" class="collapse-item" href="{{route('payment.create')}}">Effectuer un paiement</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('payment.create')}}">Payement des arriérés</a>
                     </div>
                 </div>
             </li>

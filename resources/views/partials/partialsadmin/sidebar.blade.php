@@ -107,7 +107,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 style="color:black;" class="collapse-header">Gestion :</h6>
-                        <a style="color:black;" class="collapse-item" href="">Année Scolaire</a>
+                        <a style="color:black;" class="collapse-item" href="{{ route('admin.academic')}}">Année Scolaire</a>
                         <a style="color:black;" class="collapse-item" href="{{route('admin.classes')}}">Classes</a>
                         <a style="color:black;" class="collapse-item" href="{{route('admin.faculty')}}">Options</a>
                     </div>

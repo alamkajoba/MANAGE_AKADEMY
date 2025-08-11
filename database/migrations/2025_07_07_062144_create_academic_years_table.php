@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\AcademicYearStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('academic_years', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
+            $table->string('name');
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('is_current');
+            $table->enum('status', AcademicYearStatus::values())->default(AcademicYearStatus::INACTIVE->value);
             $table->timestamps();
         });
     }

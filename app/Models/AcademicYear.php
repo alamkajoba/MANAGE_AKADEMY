@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademicYear extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'start_date', 'end_date', 'status'];
 
     //RelationShips
 }
