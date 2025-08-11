@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'middle_name' => 'Kiyumbi',
             'last_name' => 'Kiyumbi',
             'email' => 'user@example.com',
-            'function' => 'Prefet',
+            'function' => 'Secretaire',
             'role' => 'user',
             'password' => Hash::make('password')
         ]);

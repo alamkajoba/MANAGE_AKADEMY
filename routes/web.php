@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Module\AcademicYear\AcademicYearIndex;
 use App\Livewire\Module\Classes\Classes;
 use App\Livewire\Module\Faculty\Faculty;
 use App\Livewire\Module\Fees\FeesCreate;
@@ -37,7 +38,7 @@ Route::middleware('auth')->prefix('registration')->name('registration.')->group(
 #classes Faculty Academic route
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('faculty', Faculty::class)->name('faculty');
-// Route::get('academic', RegistrationCreate::class)->name('academic');
+    Route::get('academic', AcademicYearIndex::class)->name('academic');
     Route::get('classes', Classes::class)->name('classes');
 });
 
