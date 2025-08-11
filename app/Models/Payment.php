@@ -11,7 +11,7 @@ class Payment extends Model
     //RelationShips
     public function enrollment()
     {
-         return $this->belongsTo(Enrollment::class, 'enrollment_id');
+         return $this->belongsTo(Enrollment::class,);
     }
 
     public function fees()

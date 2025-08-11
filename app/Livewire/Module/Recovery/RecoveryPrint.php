@@ -9,6 +9,7 @@ use App\Models\Option;
 use App\Models\SchoolFee;
 use App\Models\Enrollment;
 use App\Models\Student;
+use App\Models\Payment;
 
 #[Layout('layouts.app')]
 class RecoveryPrint extends Component
@@ -16,11 +17,12 @@ class RecoveryPrint extends Component
     public $levels;
     public $options;
     public $feeses;
+ 
     public $selectedMonth;
     public $selectedClass;
     public $selectedOption;
     public $nameclass;
-
+   
 
      public function mount()
     {
@@ -36,35 +38,17 @@ class RecoveryPrint extends Component
         
         // $this->nameclass =$findclass->class_name;
     }
-    public function getStudentsProperty()
-{
-       $query = Enrollment::with(['student', 'payments.fees', 'level', 'option']);
-    
-   if ($this->selectedMonth) {
-        $query->whereHas('payments', function($q) {
-            $q->where('school_fees_id', $this->selectedMonth);
-        });
-    } else {
-       
-        $query->whereHas('payments');
-    }
-
-    if ($this->selectedClass) {
-        $query->where('level_id', $this->selectedClass);
-    }
-
-    if ($this->selectedOption) {
-        $query->where('option_id', $this->selectedOption);
-    }
-
-    return $query->orderBy('id')->get();
-
-}  
-
+   
     public function render()
     {
-       
-        return view('livewire.module.recovery.recovery-create', ['students' =>$this->students]);
+        $query=Payment::with(['enrollment.option','enrollment.level', 'enrollment.student', 'fees'])->get();
+            
+        return view('livewire.module.recovery.recovery-print', ['payments'=>$query]);
     
 }
 }
+// ['students' => Enrollment::with(['student', 'level', 'option', 'payments.fees'])
+//             ->when($this->selectedMonth, fn($q) => $q->whereHas('payments', fn($q2) => $q2->where('school_fees_id', $this->selectedMonth)))
+//             ->when($this->selectedClass, fn($q) => $q->where('level_id', $this->selectedClass))
+//             ->when($this->selectedOption, fn($q) => $q->where('option_id', $this->selectedOption))
+//             ->get(),]

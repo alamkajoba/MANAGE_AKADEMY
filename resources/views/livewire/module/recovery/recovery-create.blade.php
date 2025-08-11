@@ -4,7 +4,7 @@
                     <h3>FILTRE DE RECOUVREMENT</h3>
                 </div> 
                 <div>
-                    
+                    <button onclick="window.print()" style="background-color: rgb(7, 7, 99)" class="btn text-white fa fa-print">Imprimer</button>
                 </div>
                 <style>
         @media print {
@@ -105,7 +105,6 @@
                         <th>Prénom</th>
                         <th>Classe</th>
                         <th>Option</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -116,7 +115,6 @@
                              <td>{{$enrollment->student?->last_name ?? '-'}}</td>
                              <td>{{$enrollment->level?->class_name ?? '-' }} eme</td>
                             <td>{{$enrollment->option?->faculty_name ?? '-' }}</td>
-                            <td><button onclick="window.print()" style="background-color: rgb(7, 7, 99)" class="btn text-white fa fa-print">Imprimer</button></td>
                       
               
                         </tr>
