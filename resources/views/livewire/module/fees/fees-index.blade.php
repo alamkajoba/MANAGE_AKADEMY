@@ -76,7 +76,7 @@
                         @foreach ($fees as $fes)
                             <tr>
                                 <td>{{$fes->id}}</td>
-                                <td>{{$fes->name}}</td>
+                                <td>{{ucwords($fes->name)}}</td>
                                 <td>{{$fes->description}}</td>
                                 <td>{{$fes->amount}}</td>
                                 <td><button class="btn btn-info">Détail</button></td>

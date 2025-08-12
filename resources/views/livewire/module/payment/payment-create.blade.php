@@ -8,6 +8,15 @@
             {{ session('success') }}
         </div>
     @endif
+     @if (session()->has('danger'))
+        <div id="alert-danger" 
+            class="alert alert-danger fade show text-center"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
                     <h3>PAIEMENT</h3>
