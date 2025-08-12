@@ -4,6 +4,7 @@ namespace App\Livewire\Module\Registration;
 
 use App\Enums\AcademicYearStatus;
 use App\Models\AcademicYear;
+use App\Models\Enrollment;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -23,8 +24,6 @@ class RegistrationIndex extends Component
     public ?string $search = '';
 
     public $studentIdToDelete = '';
-
-    public $academicId;
 
     protected $listeners = [
         'setStudentId',
@@ -54,14 +53,19 @@ class RegistrationIndex extends Component
 
     public function render()
     {
-        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
-        $query = Student::with(['enrollment.option','enrollment.level'])
+        // Récupérer l'ID de l'année en cours
+        $academicYear = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->first();
+
+        // Construire la requête des étudiants
+        $query = Student::with(['enrollment.option', 'enrollment.level'])
+            ->whereHas('enrollment', function ($q) use ($academicYear) {
+                $q->where('academic_year_id', $academicYear->id);
+            })
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')
-                  ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                  ->orWhere('last_name', 'like', '%' . $this->search . '%');
-            })
-            ->where('academic_year_id', $this->academicId);
+                ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+                ->orWhere('last_name', 'like', '%' . $this->search . '%');
+            });
 
         return view('livewire.module.registration.registration-index', [
             'student' => $query->latest()->paginate(5),

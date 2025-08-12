@@ -113,6 +113,7 @@ class RegistrationCreate extends Component
         if($academic_id)
         {
             $student = Student::create($this->dataStudent());
+
             Enrollment::create([
                 'student_id' => $student->id,
                 'level_id' => (int)$this->class,
