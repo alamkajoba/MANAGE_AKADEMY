@@ -1,5 +1,5 @@
 <div class="card shadow mb-4">
-     @if (session()->has('success'))
+    @if (session()->has('success'))
         <div id="alert-success" 
             class="alert alert-success fade show text-center"
             role="alert"
@@ -94,7 +94,7 @@
                     </div>
             </div>  
         </div>  
-        <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const alert = document.getElementById('alert-success');
         if (alert) {

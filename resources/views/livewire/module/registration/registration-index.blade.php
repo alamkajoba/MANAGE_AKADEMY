@@ -48,11 +48,12 @@
                             <td>{{ $students->middle_name }}</td>
                             <td>{{ $students->last_name }}</td>
                             <td>{{ $students->code }}</td>
-                            @foreach ($students->enrollments as $enrollment)
-                                <td>{{ $enrollment->level->class_name }} ème</td>
+
+                            @foreach ($students->enrollment as $enrollments)
+                                <td>{{ $enrollments->level->class_name }} ème</td>
                             @endforeach
-                            @foreach ($students->enrollments as $enrollment)
-                                <td>{{ $enrollment->option->faculty_name }}</td>
+                            @foreach ($students->enrollment as $enrollments)
+                                <td>{{ $enrollments->option->faculty_name }}</td>
                             @endforeach
                             <td>
                                 <a href="{{ route('registration.update', $students->id) }}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>

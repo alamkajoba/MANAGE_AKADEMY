@@ -1,7 +1,9 @@
 <?php
 namespace App\Livewire\Module\Registration;
 
+use App\Enums\AcademicYearStatus;
 use App\Enums\GenderEnum;
+use App\Models\AcademicYear;
 use App\Models\Enrollment;
 use App\Models\Level;
 use App\Models\Option;
@@ -65,7 +67,7 @@ class RegistrationCreate extends Component
 
     // Données à enregistrer pour Student
     private function dataStudent(): array
-    {
+    { 
         return [
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,
@@ -100,16 +102,25 @@ class RegistrationCreate extends Component
             return;
         }
 
-        $student = Student::create($this->dataStudent());
+        //Select current year
+        $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
 
-        Enrollment::create([
-            'student_id' => $student->id,
-            'level_id' => (int)$this->class,
-            'option_id' => (int)$this->option,
-        ]);
-
-        session()->flash('success', "L'étudiant a été créé avec succès.");
-        return redirect()->to(route('registration.index'));
+        if($academic_id)
+        {
+            $student = Student::create($this->dataStudent());
+            Enrollment::create([
+                'student_id' => $student->id,
+                'level_id' => (int)$this->class,
+                'option_id' => (int)$this->option,
+                'academic_year_id' => $academic_id
+            ]);
+            session()->flash('success', "L'étudiant a été créé avec succès.");
+            return redirect()->to(route('registration.index'));
+        }
+        else{
+            session()->flash('danger', "Aucune année n'a été initialisée pour l'instant.");
+            return redirect()->to(route('registration.create'));
+        }
     }
 
     // Enumération du genre

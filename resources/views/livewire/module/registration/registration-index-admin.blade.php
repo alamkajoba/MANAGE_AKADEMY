@@ -36,14 +36,14 @@
                             <td>{{ $students->middle_name }}</td>
                             <td>{{ $students->last_name }}</td>
                             <td>{{ $students->code }}</td>
-                            @foreach ($students->enrollments as $enrollment)
+                            @foreach ($students->enrollment as $enrollments)
                                 <td>
-                                    {{ $enrollment->level->class_name }} ème
+                                    {{ $enrollments->level->class_name }} ème
                                 </td>
                             @endforeach
-                            @foreach ($students->enrollments as $enrollment)
+                            @foreach ($students->enrollment as $enrollments)
                                 <td>
-                                    {{ $enrollment->option->faculty_name }} 
+                                    {{ $enrollments->option->faculty_name }} 
                                 </td>
                             @endforeach
                         </tr>

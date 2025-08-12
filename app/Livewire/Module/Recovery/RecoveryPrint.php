@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Module\Recovery;
 
+use App\Enums\AcademicYearStatus;
+use App\Models\AcademicYear;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Models\Level;
@@ -22,6 +24,7 @@ class RecoveryPrint extends Component
     public $selectedClass;
     public $selectedOption;
     public $nameclass;
+    public $academicId;
    
 
      public function mount()
@@ -41,7 +44,8 @@ class RecoveryPrint extends Component
    
     public function render()
     {
-        $query=Payment::with(['enrollment.option','enrollment.level', 'enrollment.student', 'fees'])->get();
+        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+        $query=Payment::with(['enrollment.option','enrollment.level', 'enrollment.student', 'fees'])->where('academic_year_id', $this->academicId)->get();
             
         return view('livewire.module.recovery.recovery-print', ['payments'=>$query]);
     
