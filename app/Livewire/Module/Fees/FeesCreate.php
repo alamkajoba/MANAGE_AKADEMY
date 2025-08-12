@@ -39,7 +39,7 @@ class FeesCreate extends Component
             ->exists();
 
         if ($exists) {
-            session()->flash('danger', "Un frais portant ce nom existe.");
+            session()->flash('danger', "ce frais existe déjà!.");
             return redirect()->to(route('fees.create'));
         }
 
