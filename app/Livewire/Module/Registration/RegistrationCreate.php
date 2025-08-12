@@ -58,6 +58,9 @@ class RegistrationCreate extends Component
     public $levels;
     public $options;
 
+    //Annee Aca
+    public $academicId;
+
     // Génération du matricule
     private function matriculeMaker(): string
     {
@@ -134,6 +137,8 @@ class RegistrationCreate extends Component
     {
         $this->levels = Level::all();
         $this->options = Option::all();
+
+        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('status');
     }
 
     // Rendu du composant
@@ -141,6 +146,7 @@ class RegistrationCreate extends Component
     {
         return view('livewire.module.registration.registration-create', [
             'genders' => $this->genders(),
+            'academicId' => $this->academicId,
         ]);
     }
 }
