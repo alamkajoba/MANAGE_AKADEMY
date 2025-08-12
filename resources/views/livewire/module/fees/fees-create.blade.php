@@ -1,4 +1,14 @@
 <div class="card shadow mb-4">
+
+    @if (session()->has('danger'))
+        <div id="alert-success" 
+            class="alert alert-danger fade show text-center"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
                     <h3>AJOUTER UN FRAIS</h3>
@@ -57,8 +67,19 @@
                     </div>
                 </div>
             </form>
-            @if (session()->has('message'))
-        <div>{{ session('message') }}</div>
-    @endif
         </div>  
 </div> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('alert-success');
+        if (alert) {
+            setTimeout(() => {
+                alert.classList.remove('show'); // commence la disparition
+                setTimeout(() => {
+                    alert.remove(); // supprime du DOM après l'animation
+                }, 500); // temps pour le fade-out
+            }, 5000); // affichée pendant 3 secondes
+        }
+    });
+</script>

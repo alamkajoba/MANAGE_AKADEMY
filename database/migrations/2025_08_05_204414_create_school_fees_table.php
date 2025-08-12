@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->float('amount');
+            $table->foreignId('academic_year_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
