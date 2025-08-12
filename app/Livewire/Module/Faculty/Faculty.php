@@ -19,8 +19,19 @@ class Faculty extends Component
         $this->validate();
 
         //Check if unique 
-        $save = Option::create(['faculty_name' => $this->option_name]);
-        $this->reset();
+        $exist = Option::where('faculty_name', $this->option_name)->exists();
+        if($exist)
+        {
+            session()->flash('danger', "Cette option a déjà été créée!.");
+            return redirect()->to(route('admin.faculty'));
+        }
+        else
+        {
+            $save = Option::create(['faculty_name' => $this->option_name]);
+            $this->reset();
+            session()->flash('success', "Option créée avec succès!.");
+            return redirect()->to(route('admin.faculty'));
+        }
     }
 
     public function destroyOption($id)

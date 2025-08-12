@@ -92,6 +92,8 @@ class RegistrationCreate extends Component
         return Student::where('first_name', $this->first_name)
             ->where('last_name', $this->last_name)
             ->where('birth_date', $this->birth_date)
+            ->where('tutor_name', $this->tutor_name)
+            ->where('phone1', $this->phone1)
             ->exists();
     }
 
@@ -101,8 +103,8 @@ class RegistrationCreate extends Component
         $this->validate();
 
         if ($this->uniqueStudent()) {
-            $this->addError('exist', 'Un Elève avec ces informations existe déjà.');
-            return;
+            session()->flash('danger', "Cet étudiant existe déjà!...");
+            return redirect()->to(route('registration.create'));
         }
 
         //Select current year
