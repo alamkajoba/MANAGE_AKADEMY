@@ -56,11 +56,11 @@ class RegistrationIndex extends Component
     {
         $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
         $query = Student::with(['enrollment.option','enrollment.level'])
-            ->where('academic_year_id', $this->academicId)
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')
                   ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                  ->orWhere('last_name', 'like', '%' . $this->search . '%');
+                  ->orWhere('last_name', 'like', '%' . $this->search . '%')
+                  ->where('academic_year_id', $this->academicId);
             });
 
         return view('livewire.module.registration.registration-index', [

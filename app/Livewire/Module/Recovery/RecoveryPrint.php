@@ -12,6 +12,7 @@ use App\Models\SchoolFee;
 use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Payment;
+use Carbon\Carbon;
 
 #[Layout('layouts.app')]
 class RecoveryPrint extends Component
@@ -44,15 +45,13 @@ class RecoveryPrint extends Component
    
     public function render()
     {
+        $today = Carbon::today();
         $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
-        $query=Payment::with(['enrollment.option','enrollment.level', 'enrollment.student', 'fees'])->where('academic_year_id', $this->academicId)->get();
+        $query=Payment::with(['enrollment.option','enrollment.level', 'enrollment.student', 'fees'])
+        ->where('academic_year_id', $this->academicId)
+        ->whereDate('created_at', $today)->get();
             
         return view('livewire.module.recovery.recovery-print', ['payments'=>$query]);
     
 }
 }
-// ['students' => Enrollment::with(['student', 'level', 'option', 'payments.fees'])
-//             ->when($this->selectedMonth, fn($q) => $q->whereHas('payments', fn($q2) => $q2->where('school_fees_id', $this->selectedMonth)))
-//             ->when($this->selectedClass, fn($q) => $q->where('level_id', $this->selectedClass))
-//             ->when($this->selectedOption, fn($q) => $q->where('option_id', $this->selectedOption))
-//             ->get(),]
