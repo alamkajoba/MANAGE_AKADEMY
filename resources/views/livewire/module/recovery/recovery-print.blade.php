@@ -31,7 +31,7 @@
                                 <button class="btn text-white fa fa-print"
                                     style="background-color: rgb(7, 7, 99)"
                                     onclick="printDiv('receipt-{{ $payment->id }}')">
-                                    Imprimer
+                                    Imprimer reçu
                                 </button>
                             </td>
                         </tr>

@@ -72,10 +72,17 @@ class PaymentCreate extends Component
     {
         //Select active year
         $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+
+      
         //check if exist
-        $exist = Payment::where('enrollment_id', $this->search)->where('fees_id', $this->fees)->exists();
+        $exist = Payment::where('enrollment_id', $this->search)
+        ->where('school_fees_id', $this->fees)
+        ->where('academic_year_id', $academic_id)->exists();
+
         if($exist){
-            session()->flash('message', "L'eleve a deja paye ce frais");
+            $this->reset();
+            session()->flash('danger', "l'élève a deja payé ce frais!!!.");
+            return redirect()->to(route('payment.create'));
         }
         else{
             Payment::create([
@@ -83,10 +90,11 @@ class PaymentCreate extends Component
                 'school_fees_id' => $this->fees,
                 'academic_year_id' => $academic_id
             ]);
-        }
-        $this->reset();
+            $this->reset();
         session()->flash('success', "Paiement effectué avec succès.");
         return redirect()->to(route('payment.create'));
+        }
+        
     }
 
     public function render()
