@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Module\Payment;
 
+use App\Enums\AcademicYearStatus;
+use App\Models\AcademicYear;
 use App\Models\Payment;
 use App\Models\SchoolFee;
 use App\Models\Student;
@@ -68,6 +70,8 @@ class PaymentCreate extends Component
     //Create fees
     public function SavePayment()
     {
+        //Select active year
+        $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
         //check if exist
         $exist = Payment::where('enrollment_id', $this->search)->where('fees_id', $this->fees)->exists();
         if($exist){
@@ -76,7 +80,8 @@ class PaymentCreate extends Component
         else{
             Payment::create([
                 'enrollment_id' => $this->search,
-                'school_fees_id' => $this->fees
+                'school_fees_id' => $this->fees,
+                'academic_year_id' => $academic_id
             ]);
         }
         $this->reset();

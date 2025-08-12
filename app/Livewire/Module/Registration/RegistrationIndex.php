@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Module\Registration;
 
+use App\Enums\AcademicYearStatus;
+use App\Models\AcademicYear;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -21,6 +23,8 @@ class RegistrationIndex extends Component
     public ?string $search = '';
 
     public $studentIdToDelete = '';
+
+    public $academicId;
 
     protected $listeners = [
         'setStudentId',
@@ -50,7 +54,9 @@ class RegistrationIndex extends Component
 
     public function render()
     {
-        $query = Student::with(['enrollments.level', 'enrollments.option'])
+        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+        $query = Student::with(['enrollment.option','enrollment.level'])
+            ->where('academic_year_id', $this->academicId)
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')
                   ->orWhere('middle_name', 'like', '%' . $this->search . '%')

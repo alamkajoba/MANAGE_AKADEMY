@@ -22,7 +22,7 @@ class RegistrationIndexAdmin extends Component
 
     public function render()
     {
-        $query = Student::with(['enrollments.level', 'enrollments.option']) // 
+        $query = Student::with(['enrollment.level', 'enrollment.option']) // 
         ->where(function ($q) {
             $q->where('first_name', 'like', '%' . $this->search . '%')
             ->orWhere('middle_name', 'like', '%' . $this->search . '%')
