@@ -4,10 +4,10 @@
             <div  id="print-section" class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100px" cellspacing="0">
                 {{-- searchfilter --}}
-               
+              
                   
                 <thead >
-                    
+                    <p class="text-muted">Paiements  du : <strong>{{ \Carbon\Carbon::now()->format('d/m/Y') }}</strong></p>
                     <tr><td colspan="4"></td></tr>
                     <tr style="background-color: rgb(7, 7, 99)" class="text-white">
                         <th>Nom</th>
