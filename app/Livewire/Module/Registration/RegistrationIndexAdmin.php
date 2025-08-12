@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Module\Registration;
 
+use App\Enums\AcademicYearStatus;
+use App\Models\AcademicYear;
 use App\Models\Student;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Url;
@@ -19,15 +21,18 @@ class RegistrationIndexAdmin extends Component
     public ?string $search = '';
 
     protected $paginationTheme = 'bootstrap';
+    public $academicId;
 
     public function render()
     {
+        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
         $query = Student::with(['enrollment.level', 'enrollment.option']) // 
         ->where(function ($q) {
             $q->where('first_name', 'like', '%' . $this->search . '%')
             ->orWhere('middle_name', 'like', '%' . $this->search . '%')
             ->orWhere('last_name', 'like', '%' . $this->search . '%');
-        });
+        })
+        ->where('academic_year_id', $this->academicId);
 
         return view('livewire.module.registration.registration-index-admin', [
             'student' => $query->latest()->paginate(5),

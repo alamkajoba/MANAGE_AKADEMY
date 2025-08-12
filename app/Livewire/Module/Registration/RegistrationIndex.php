@@ -59,9 +59,9 @@ class RegistrationIndex extends Component
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')
                   ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                  ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                  ->where('academic_year_id', $this->academicId);
-            });
+                  ->orWhere('last_name', 'like', '%' . $this->search . '%');
+            })
+            ->where('academic_year_id', $this->academicId);
 
         return view('livewire.module.registration.registration-index', [
             'student' => $query->latest()->paginate(5),
