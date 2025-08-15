@@ -24,7 +24,7 @@ class ReRegistrationCreate extends Component
         //Looking for items
         $this->items_student = Student::where('first_name', 'like', '%'.$this->search.'%')
             ->orwhere('last_name', 'like', '%'.$this->search.'%')
-            ->orwhere('middle_patient', 'like', '%'.$this->search.'%')
+            ->orwhere('middle_name', 'like', '%'.$this->search.'%')
             ->orwhere('code', 'like', '%'.$this->search.'%')
             ->limit(1)
             ->get()
