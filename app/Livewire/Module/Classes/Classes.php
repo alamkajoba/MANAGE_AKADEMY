@@ -16,8 +16,19 @@ class Classes extends Component
     public function submitClass()
     {
         //Check if unique 
-        $save = Level::create(['class_name' => $this->class_name]);
-        $this->reset();
+        $exist = Level::where('class_name', $this->class_name)->exists();
+        if($exist)
+        {
+            session()->flash('danger', "Cette classe existe déjà.");
+            return redirect()->to(route('admin.classes'));
+        }
+        else
+        {
+            $save = Level::create(['class_name' => $this->class_name]);
+            $this->reset();
+            session()->flash('success', "Classe créée avec succès.");
+            return redirect()->to(route('admin.classes'));
+        }
     }
 
     //Delete class 

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Module\ReRegistration;
 
+use App\Models\Level;
+use App\Models\Option;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -14,19 +16,22 @@ class ReRegistrationCreate extends Component
     public $items_student = [];
     public $selected_student = [null];
 
+    public $option;
+    public $classe;
+
     public function searchStundent(): void
     {
         //Looking for items
         $this->items_student = Student::where('first_name', 'like', '%'.$this->search.'%')
             ->orwhere('last_name', 'like', '%'.$this->search.'%')
-            ->orwhere('middle_patient', 'like', '%'.$this->search.'%')
+            ->orwhere('middle_name', 'like', '%'.$this->search.'%')
             ->orwhere('code', 'like', '%'.$this->search.'%')
             ->limit(1)
             ->get()
             ->toArray();
     }
 
-        //Selected student
+    //Selected student
     public function selectStudent($itemId): void
     {
         // Sélectionne un élément
@@ -36,8 +41,17 @@ class ReRegistrationCreate extends Component
 
     }
 
+    public function mount()
+    {
+        $this->classe = Level::all();
+        $this->option = Option::all();
+    }
+
     public function render()
     {
-        return view('livewire.module.re-registration.re-registration-create');
+        return view('livewire.module.re-registration.re-registration-create',[
+            'classe' => $this->classe,
+            'option' => $this->option
+        ]);
     }
 }

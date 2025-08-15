@@ -17,9 +17,6 @@ class AcademicYearIndex extends Component
     use WithoutUrlPagination;
 
     #[Validate('required')]
-    public $name;
-
-    #[Validate('required')]
     public $start_date;
 
     #[Validate('required')]
@@ -29,7 +26,6 @@ class AcademicYearIndex extends Component
     public function submitAcademic()
     {
         AcademicYear::create([
-            'name' => $this->name,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date
         ]);

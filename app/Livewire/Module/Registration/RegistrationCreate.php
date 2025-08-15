@@ -11,10 +11,16 @@ use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
 
 #[Layout('layouts.app')]
 class RegistrationCreate extends Component
 {
+
+    public $convertFirstName;
+    public $convertMiddleName;
+    public $convertLastName;
+    public $convertTutorName;
     // Champs liés à l'étudiant
     public $code;
 
@@ -58,6 +64,9 @@ class RegistrationCreate extends Component
     public $levels;
     public $options;
 
+    //Annee Aca
+    public $academicId;
+
     // Génération du matricule
     private function matriculeMaker(): string
     {
@@ -83,31 +92,39 @@ class RegistrationCreate extends Component
         ];
     }
 
-    // Vérification d'unicité
-    private function uniqueStudent(): bool
-    {
-        return Student::where('first_name', $this->first_name)
-            ->where('last_name', $this->last_name)
-            ->where('birth_date', $this->birth_date)
-            ->exists();
-    }
 
     // Enregistrement principal
     public function submitStudent()
     {
         $this->validate();
 
-        if ($this->uniqueStudent()) {
-            $this->addError('exist', 'Un Elève avec ces informations existe déjà.');
-            return;
-        }
-
         //Select current year
         $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+
+        //Convert in lower case
+        $this->convertFirstName = Str::lower(trim($this->first_name));
+        $this->convertMiddleName = Str::lower(trim($this->middle_name));
+        $this->convertLastName = Str::lower(trim($this->last_name));
+        $this->convertTutorName = Str::lower(trim($this->tutor_name));
+
+        //Check if exist
+        $existStudent = Student::whereRaw('LOWER(first_name) = ?', [$this->convertFirstName])
+            ->whereRaw('LOWER(middle_name) = ?', [$this->convertMiddleName])
+            ->whereRaw('LOWER(last_name) = ?', [$this->convertLastName])
+            ->where('birth_date', $this->birth_date)
+            ->whereRaw('LOWER(tutor_name) = ?', [$this->convertTutorName])
+            ->exists();
+
+        if ($existStudent) {
+            session()->flash('danger', "Cet étudiant existe déjà!...");
+            return redirect()->route('registration.create');
+        }
+
 
         if($academic_id)
         {
             $student = Student::create($this->dataStudent());
+
             Enrollment::create([
                 'student_id' => $student->id,
                 'level_id' => (int)$this->class,
@@ -134,6 +151,8 @@ class RegistrationCreate extends Component
     {
         $this->levels = Level::all();
         $this->options = Option::all();
+
+        $this->academicId = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('status');
     }
 
     // Rendu du composant
@@ -141,6 +160,7 @@ class RegistrationCreate extends Component
     {
         return view('livewire.module.registration.registration-create', [
             'genders' => $this->genders(),
+            'academicId' => $this->academicId,
         ]);
     }
 }

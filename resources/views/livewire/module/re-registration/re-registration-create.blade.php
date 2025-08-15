@@ -13,6 +13,7 @@
         {{-- table --}}
         <div class="justify-content-between card-header">
             <form>
+                @csrf
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
@@ -41,20 +42,21 @@
                             @endif
 
                             <label for="">Classe</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
+                            <select wire:model="" class="form-control">
+                                <option value="">Selectionner une classe</option>
+                                @foreach ($classe as $classes)
+                                    <option value="{{ $classes->id }}">{{ $classes->class_name }} ème</option>
+                                @endforeach
+                            </select>
 
                             <label for="">Option</label>
-                            <input 
-                                class="form-control"
-                                type="text"
-                                placeholder=""
-                                wire:model=""
-                            >
+                            <select wire:model="" class="form-control">
+                                <option value="">Selectionner une option</option>
+                                @foreach ($option as $options)
+                                    <option value="{{ $options->id }}">{{ $options->faculty_name }}</option>
+                                @endforeach
+                            </select>
+
                         </div>
                     </div>
                     <div>
