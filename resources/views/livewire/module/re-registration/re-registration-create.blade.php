@@ -1,4 +1,16 @@
 <div class="card shadow mb-4">
+
+    {{-- NOTIFICATION FLASH --}}
+    @if (session()->has('danger'))
+        <div id="alert-success" 
+            class="alert alert-danger fade show text-center shadow-lg"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
+
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
                     <h3 class="m-0 font-weight-bold text-primary">RE-INSCRIPTION</h3>
@@ -12,7 +24,7 @@
         </div>
         {{-- table --}}
         <div class="justify-content-between card-header">
-            <form>
+            <form wire:submit.prevent="saveReregistration()">
                 @csrf
                 <div class="container">
                     <div class="row">
@@ -31,7 +43,7 @@
                                     @forelse ($items_student as $items_students)
                                         <a href="" class="list-group-item mb-2 flex bg-primary-200 hover:bg-primary-500"
                                             wire:click.prevent="selectStudent({{$items_students['id']}})">
-                                            {{ $items_students['first_name'].' '. $items_students['last_name'].' '.$items_students['code']}}
+                                            {{ $items_students['first_name'].' '.$items_students['middle_name'].' '. $items_students['last_name'].' '.$items_students['code']}}
                                         </a>
                                     @empty
                                         <div class="list-group-item mb-2 flex bg-danger-200">
@@ -42,7 +54,7 @@
                             @endif
 
                             <label for="">Classe</label>
-                            <select wire:model="" class="form-control">
+                            <select wire:model="classeId" class="form-control">
                                 <option value="">Selectionner une classe</option>
                                 @foreach ($classe as $classes)
                                     <option value="{{ $classes->id }}">{{ $classes->class_name }} ème</option>
@@ -50,7 +62,7 @@
                             </select>
 
                             <label for="">Option</label>
-                            <select wire:model="" class="form-control">
+                            <select wire:model="optionId" class="form-control">
                                 <option value="">Selectionner une option</option>
                                 @foreach ($option as $options)
                                     <option value="{{ $options->id }}">{{ $options->faculty_name }}</option>
@@ -68,3 +80,30 @@
             </form>
         </div>  
 </div> 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const alert = document.getElementById('alert-success');
+        if (alert) {
+            setTimeout(() => {
+                alert.classList.remove('show'); // commence la disparition
+                setTimeout(() => {
+                    alert.remove(); // supprime du DOM après l'animation
+                }, 500); // temps pour le fade-out
+            }, 5000); // affichée pendant 3 secondes
+        }
+    });
+
+    // Au chargement du DOM
+    document.addEventListener('DOMContentLoaded', function () {
+        var exampleModal = document.getElementById('exampleModal');
+        exampleModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // bouton qui ouvre le modal
+            var studentId = button.getAttribute('data-id'); // récupère l'ID
+
+            // Affiche l'ID dans le modal
+            var spanId = exampleModal.querySelector('#studentIdToDelete');
+            spanId.textContent = studentId;
+        });
+    });
+</script>

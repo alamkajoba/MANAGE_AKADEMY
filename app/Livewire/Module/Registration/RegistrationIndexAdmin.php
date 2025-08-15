@@ -29,18 +29,18 @@ class RegistrationIndexAdmin extends Component
         $academicYear = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->first();
 
         // Construire la requête des étudiants
-        $query = Student::with(['enrollment.option', 'enrollment.level'])
-            ->whereHas('enrollment', function ($q) use ($academicYear) {
-                if($academicYear?->id)
-                {
-                    $q->where('academic_year_id', $academicYear->id);
-                }
-            })
-            ->where(function ($q) {
-                $q->where('first_name', 'like', '%' . $this->search . '%')
-                ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                ->orWhere('last_name', 'like', '%' . $this->search . '%');
-            });
+        $query = Student::with(['enrollment' => function($q) use ($academicYear) {
+            $q->where('academic_year_id', $academicYear->id)
+            ->with(['option', 'level']);
+        }])
+        ->whereHas('enrollment', function ($q) use ($academicYear) {
+            $q->where('academic_year_id', $academicYear->id);
+        })
+        ->where(function ($q) {
+            $q->where('first_name', 'like', '%' . $this->search . '%')
+            ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+            ->orWhere('last_name', 'like', '%' . $this->search . '%');
+        });
 
         return view('livewire.module.registration.registration-index-admin', [
             'student' => $query->latest()->paginate(5),
