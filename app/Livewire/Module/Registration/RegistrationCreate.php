@@ -11,10 +11,16 @@ use App\Models\Student;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
 
 #[Layout('layouts.app')]
 class RegistrationCreate extends Component
 {
+
+    public $convertFirstName;
+    public $convertMiddleName;
+    public $convertLastName;
+    public $convertTutorName;
     // Champs liés à l'étudiant
     public $code;
 
@@ -86,29 +92,34 @@ class RegistrationCreate extends Component
         ];
     }
 
-    // Vérification d'unicité
-    private function uniqueStudent(): bool
-    {
-        return Student::where('first_name', $this->first_name)
-            ->where('last_name', $this->last_name)
-            ->where('birth_date', $this->birth_date)
-            ->where('tutor_name', $this->tutor_name)
-            ->where('phone1', $this->phone1)
-            ->exists();
-    }
 
     // Enregistrement principal
     public function submitStudent()
     {
         $this->validate();
 
-        if ($this->uniqueStudent()) {
-            session()->flash('danger', "Cet étudiant existe déjà!...");
-            return redirect()->to(route('registration.create'));
-        }
-
         //Select current year
         $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+
+        //Convert in lower case
+        $this->convertFirstName = Str::lower(trim($this->first_name));
+        $this->convertMiddleName = Str::lower(trim($this->middle_name));
+        $this->convertLastName = Str::lower(trim($this->last_name));
+        $this->convertTutorName = Str::lower(trim($this->tutor_name));
+
+        //Check if exist
+        $existStudent = Student::whereRaw('LOWER(first_name) = ?', [$this->convertFirstName])
+            ->whereRaw('LOWER(middle_name) = ?', [$this->convertMiddleName])
+            ->whereRaw('LOWER(last_name) = ?', [$this->convertLastName])
+            ->where('birth_date', $this->birth_date)
+            ->whereRaw('LOWER(tutor_name) = ?', [$this->convertTutorName])
+            ->exists();
+
+        if ($existStudent) {
+            session()->flash('danger', "Cet étudiant existe déjà!...");
+            return redirect()->route('registration.create');
+        }
+
 
         if($academic_id)
         {

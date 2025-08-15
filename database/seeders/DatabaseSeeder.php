@@ -26,12 +26,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'first_name' => 'Christian',
-            'middle_name' => 'Kiyumbi',
-            'last_name' => 'Kiyumbi',
+            'first_name' => 'Alam',
+            'middle_name' => 'Kajoba',
+            'last_name' => 'Kilmbo',
             'email' => 'user@example.com',
             'function' => 'Secretaire',
             'role' => 'user',
+            'password' => Hash::make('password')
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'pierrot',
+            'middle_name' => 'kalala',
+            'last_name' => 'wangata',
+            'email' => 'superadmin@example.com',
+            'function' => 'TOPADMIN',
+            'role' => 'superadmin',
             'password' => Hash::make('password')
         ]);
     }

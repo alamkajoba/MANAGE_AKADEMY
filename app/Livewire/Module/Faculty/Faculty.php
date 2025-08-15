@@ -6,6 +6,7 @@ use App\Models\Option;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
 
 #[Layout('layouts.topadmin')]
 class Faculty extends Component
@@ -19,7 +20,9 @@ class Faculty extends Component
         $this->validate();
 
         //Check if unique 
-        $exist = Option::where('faculty_name', $this->option_name)->exists();
+        $convertOptionName = Str::lower(trim($this->option_name));
+        $exist = Option::whereRaw('LOWER(faculty_name) = ?', [$convertOptionName])->exists();
+
         if($exist)
         {
             session()->flash('danger', "Cette option a déjà été créée!.");

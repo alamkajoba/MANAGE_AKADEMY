@@ -12,6 +12,16 @@
         </div>
     @endif
 
+    @if (session()->has('danger'))
+        <div id="alert-success" 
+            class="alert alert-danger fade show text-center shadow-lg"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
+
     <!-- Header -->
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
         <h3>LISTE DES ELEVES</h3>
@@ -61,7 +71,7 @@
                             <td>
                                 <button class="btn btn-danger btn-sm" 
                                     data-bs-toggle="modal" 
-                                    data-bs-target="#exampleModal" 
+                                    data-bs-target="#deleteStudentModal" 
                                     wire:click="setStudentId({{ $students->id }})"
                                     >
                                     
@@ -83,22 +93,36 @@
             {{ $student->links() }}
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <!-- Modal delete student -->
+        <div class="modal fade" id="deleteStudentModal" tabindex="-1" aria-labelledby="deleteStudentModal" aria-hidden="true" wire:ignore.self>
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-0">
                     <div style="background-color: rgb(7, 7, 99)" class="modal-header text-white rounded-0">
-                        <h5 class="modal-title" id="exampleModalLabel">Suppression d'un Etudiant</h5>
+                        <h5 class="modal-title" id="deleteStudentModal">Confirmer l'action</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
                     </div>
                     <div class="modal-body">
-                        Cette action est irréversible pour l'étudiant 
+                        <!-- Formulaire de connexion -->
+                        <form wire:submit.prevent="destroyStudent">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Identifiant</label>
+                                <input type="text" class="form-control" wire:model.defer="user" required autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mot de passe</label>
+                                <input type="password" class="form-control" wire:model.defer="password" required autocomplete="off">
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                       
-                        <button wire:click="destroyStudent()" style="background-color: rgb(7, 7, 99)" class="btn text-white" data-bs-dismiss="modal">Confirmer</button>
-                        
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button 
+                            wire:click="destroyStudent" 
+                            style="background-color: rgb(7, 7, 99)" 
+                            class="btn text-white"
+                        >
+                            Supprimer
+                        </button>
                     </div>
                 </div>
             </div>

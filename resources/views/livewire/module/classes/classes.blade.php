@@ -59,13 +59,13 @@
                         @forelse ($class as $classes)
                             <tr>
                                 <td>{{$classes->class_name}} ème</td>
-                                <td>
+                                {{-- <td>
                                     <button class="btn btn-danger btn-sm"
                                             wire:click="destroyClass({{$classes->id}})"
                                             title="Supprimer l'étudiant">
                                             Supprimer
                                     </button>
-                                </td>
+                                </td> --}}
                             </tr>
                         @empty
                             <tr>
