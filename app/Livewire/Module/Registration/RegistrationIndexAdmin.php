@@ -31,7 +31,10 @@ class RegistrationIndexAdmin extends Component
         // Construire la requête des étudiants
         $query = Student::with(['enrollment.option', 'enrollment.level'])
             ->whereHas('enrollment', function ($q) use ($academicYear) {
-                $q->where('academic_year_id', $academicYear->id);
+                if($academicYear?->id)
+                {
+                    $q->where('academic_year_id', $academicYear->id);
+                }
             })
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')

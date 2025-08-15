@@ -6,6 +6,8 @@ use App\Enums\AcademicYearStatus;
 use App\Models\AcademicYear;
 use App\Models\Enrollment;
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Url;
@@ -25,6 +27,9 @@ class RegistrationIndex extends Component
 
     public $studentIdToDelete = '';
 
+    public $user;
+    public $password;
+
     protected $listeners = [
         'setStudentId',
     ];
@@ -43,12 +48,26 @@ class RegistrationIndex extends Component
         $this->studentIdToDelete = $id;
     }
 
+    
+
     public function destroyStudent()
     {
-        $student = Student::findOrFail($this->studentIdToDelete);
-        $student->delete();
-        session()->flash('success', "L'Etudiant a été supprimé avec succès.");
-        return redirect()->to(route('registration.index'));
+        // Récupération de l'utilisateur par email
+        $user = User::where('email', $this->user)->first();
+
+        // Vérification de l'existence de l'utilisateur et du mot de passe
+        if ($user && Hash::check($this->password, $user->password)) {
+
+            $student = Student::findOrFail($this->studentIdToDelete);
+            $student->delete();
+
+            session()->flash('success', "L'étudiant a été supprimé avec succès.");
+            return redirect()->route('registration.index');
+
+        } else {
+            session()->flash('danger', "Identifiant ou mot de passe incorrect.");
+            return redirect()->route('registration.index');
+        }
     }
 
     public function render()
@@ -59,7 +78,10 @@ class RegistrationIndex extends Component
         // Construire la requête des étudiants
         $query = Student::with(['enrollment.option', 'enrollment.level'])
             ->whereHas('enrollment', function ($q) use ($academicYear) {
-                $q->where('academic_year_id', $academicYear->id);
+                if($academicYear?->id)
+                {
+                    $q->where('academic_year_id', $academicYear->id);
+                }
             })
             ->where(function ($q) {
                 $q->where('first_name', 'like', '%' . $this->search . '%')

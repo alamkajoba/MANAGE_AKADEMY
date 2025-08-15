@@ -19,14 +19,6 @@
             </div>
             <form wire:submit="submitAcademic()">
                 @csrf
-                    <label for="middlename">Label</label>
-                    <input 
-                        required
-                        class="form-control"
-                        type="text"
-                        placeholder=""
-                        wire:model="name"
-                    >
                     <label for="middlename">Debut</label>
                     <input 
                         required
@@ -96,6 +88,8 @@
                                 <td>
                                     <button class="btn btn-danger btn-sm"
                                             wire:click=""
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteAcademicModal"
                                             title="Supprimer l'étudiant">
                                             Supprimer
                                     </button>
@@ -108,6 +102,42 @@
                         @endforelse
                     </tbody>
                 </table>
+
+
+            <!-- Modal delete academic -->
+            <div class="modal fade" id="deleteAcademicModal" tabindex="-1" aria-labelledby="deleteAcademicModalLabel" aria-hidden="true" wire:ignore.self>
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content rounded-0">
+                        <div style="background-color: rgb(7, 7, 99)" class="modal-header text-white rounded-0">
+                            <h5 class="modal-title" id="deleteAcademicModalLabel">Confirmer l'action</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Formulaire de connexion -->
+                            <form >
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Identifiant</label>
+                                    <input type="text" id="username" class="form-control" wire:model.defer="username" required autocomplete="off" >
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Mot de passe</label>
+                                    <input type="password" id="password" class="form-control" wire:model.defer="password" required autocomplete="off">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            <button 
+                                style="background-color: rgb(7, 7, 99)" 
+                                class="btn text-white"
+                            >
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ModalEnd -->
             </div>
         </div>
     </div>

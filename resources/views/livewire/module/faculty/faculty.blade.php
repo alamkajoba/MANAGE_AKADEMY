@@ -60,13 +60,13 @@
                         @forelse ($faculty as $faculties)
                             <tr>
                                 <td>{{$faculties->faculty_name}}</td>
-                                <td>
+                                {{-- <td>
                                     <button class="btn btn-danger btn-sm"
                                             wire:click="destroyOption({{$faculties->id}})"
                                             title="Supprimer l'étudiant">
                                             Supprimer
                                     </button>
-                                </td>
+                                </td> --}}
                             </tr>
                         @empty
                             <tr>
