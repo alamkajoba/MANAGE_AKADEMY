@@ -18,12 +18,14 @@ class PaymentCreate extends Component
     public $search = '';
     public $items_student = [];
     public $selected_student = [null];
+    public $studentId;
     
 
     //Var for auto complete student
     public $fees = '';
     public $items_fees = [];
     public $selected_fees = [null];
+    public $feesId;
 
     public function searchStundent(): void
     {
@@ -42,7 +44,8 @@ class PaymentCreate extends Component
     {
         // Sélectionne un élément
         $this->selected_student = Student::find($itemId)->toArray();
-        $this->search = $this->selected_student['id'];
+        $this->search = $this->selected_student['middle_name'].' '.$this->selected_student['last_name'].' '.$this->selected_student['first_name'];
+        $this->studentId = $this->selected_student['id'];
         $this->items_student = []; // Vide les suggestions
 
     }
@@ -62,7 +65,8 @@ class PaymentCreate extends Component
     {
         // Sélectionne un élément
         $this->selected_fees = SchoolFee::find($itemId)->toArray();
-        $this->fees = $this->selected_fees['id'];
+        $this->fees = $this->selected_fees['name'].''.$this->selected_fees['amount'] .'Fc';
+        $this->feesId = $this->selected_fees['id'];
         $this->items_fees = []; // Vide les suggestions
 
     }
