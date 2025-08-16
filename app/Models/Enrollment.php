@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
-    protected $fillable = ['student_id', 'level_id', 'academic_id', 'option_id', 'academic_year_id'];
+    protected $fillable = ['student_id', 'level_id', 'option_id', 'academic_year_id'];
 
     //RelationShips
     public function academic()
