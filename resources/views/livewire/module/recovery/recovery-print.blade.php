@@ -1,4 +1,22 @@
   <div class="container">
+    @if (session()->has('success'))
+        <div id="alert-success" 
+            class="alert alert-success fade show text-center"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('success') }}
+        </div>
+    @endif
+     @if (session()->has('danger'))
+        <div id="alert-danger" 
+            class="alert alert-danger fade show text-center"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
         <div class="row">   
                           
             <div  id="print-section" class="table-responsive">
