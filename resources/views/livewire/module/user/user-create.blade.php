@@ -8,6 +8,16 @@
             {{ session('success') }}
         </div>
     @endif
+
+    @if (session()->has('danger'))
+        <div id="alert-success" 
+            class="alert alert-danger fade show text-center shadow-lg"
+            role="alert"
+            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                    z-index: 9999; width: fit-content; min-width: 500px;">
+            {{ session('danger') }}
+        </div>
+    @endif
         <div class="justify-content-between card-header py-3 d-flex">
                 <div>
                     <h3>AJOUTER UN MEMBRE ADMINISTRATIF</h3>
@@ -62,20 +72,13 @@
                                 wire:model="email"
                             >
 
-                            <label for="">Rôle</label>
-                            <select wire:model="role" class="form-control">
-                                <option>Selectionner...</option>
-                                @foreach ($this->role() as $roles)
-                                    <option value="{{ $roles }}">{{ $roles }}</option>
-                                @endforeach
-                            </select>
-
-                            <label for="">Fonction</label>
+                            <label for="">Selectionner Role</label>
                             <input 
+                                required
                                 class="form-control"
                                 type="text"
                                 placeholder=""
-                                wire:model="function"
+                                wire:model="role"
                             >
                         </div>
 

@@ -29,7 +29,7 @@ class UserIndex extends Component
     public $first_name ='';
     public $middle_name ='';
     public $last_name ='';
-    public $functionUser ='';
+    public $permission ='';
     public $createUser ='';
     public $roleUser ='';
 
@@ -65,9 +65,9 @@ class UserIndex extends Component
         $this->first_name = $user->first_name;
         $this->middle_name = $user->middle_name;
         $this->last_name = $user->last_name;
-        $this->functionUser = $user->function;
+        $this->roleUser = $user->getRoleNames()->first();
         $this->createUser = $user->created_at;
-        $this->roleUser = $user->role;
+        $this->permission = $user->getRoleNames()->first();
     }
 
     public function render()

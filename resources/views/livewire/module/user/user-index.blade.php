@@ -38,7 +38,7 @@
                         <th>Postnom</th>
                         <th>Prénom</th>
                         <th>Fonction</th>
-                        <th colspan="3">Action</th>
+                        <th colspan="4">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,18 +47,22 @@
                             <td>{{ $users->middle_name }}</td>
                             <td>{{ $users->last_name }}</td>
                             <td>{{ $users->first_name }}</td>
-                            <td>{{ $users->function }}</td>
+                            <td>{{ $users->getRoleNames()->first(); }}</td>
                             <td>
-                                {{-- <button class="btn btn-primary">Ajouter</button> --}}
                                 <a data-bs-toggle="modal" data-bs-target="#detailModal" wire:click="detailUser({{$users->id}})"   href="#" style="background-color: rgb(7, 7, 99)" class="btn text-white">Détails</a>
                             </td>
+
                             <td>
-                                {{-- <button class="btn btn-primary">Ajouter</button> --}}
+                                <a href="{{ route('permission.assign', $users->id)}}" style="background-color: rgb(2, 150, 9)" class="btn text-white">Assinger permissions</a>
+                            </td>
+
+                            <td>
                                 <a href="{{ route('user.userupdate', $users->id)}}" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
                             </td>
                             <td>
-                                {{-- <button class="btn btn-primary">Ajouter</button> --}}
-                                <button class="btn btn-danger btn-sm" 
+                                <button 
+                                    style="background-color: rgb(207, 32, 32)" 
+                                    class="btn text-white"
                                     data-bs-toggle="modal" 
                                     data-bs-target="#exampleModal" 
                                     wire:click="setUserId({{ $users->id }})"
@@ -115,9 +119,9 @@
                     </div>
                     <div class="modal-body">
                         <p>Agent: <strong>{{$first_name}} {{$middle_name}} {{$last_name}}</strong></p>
-                        <p>Fonction: <strong>{{$functionUser}}</strong></p>
+                        <p>Role: <strong>{{$roleUser}}</strong></p>
                         <p>Membre depuis: <strong>{{$createUser}}</strong></p>
-                        <p>Role dans le systeme: <strong>{{$roleUser}}</strong></p>
+                        <p>Permission: <strong>{{$roleUser}}</strong></p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>

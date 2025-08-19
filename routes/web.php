@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Module\Permissions\AssignPermission;
 use App\Livewire\Module\AcademicYear\AcademicYearIndex;
 use App\Livewire\Module\Classes\Classes;
 use App\Livewire\Module\Faculty\Faculty;
@@ -72,6 +73,11 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('usercreate', UserCreate::class)->name('create');
     Route::get('userindex', UserIndex::class)->name('index');
     Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
+});
+
+#Permissions and roles
+Route::middleware('auth')->prefix('permission')->name('permission.')->group(function () {
+    Route::get('assign/{id}', AssignPermission::class)->name('assign');
 });
 
 

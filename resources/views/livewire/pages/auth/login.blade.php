@@ -17,18 +17,21 @@ new #[Layout('layouts.guest')] class extends Component
         $this->validate();
 
         $this->form->authenticate();
+        Session::regenerate();
+        return redirect()->route('user.index');
 
-        if (auth()->user()->role === 'admin') {
-            Session::regenerate();
 
-            return redirect()->route('user.index');
-        }
+        // if (auth()->user()->role === 'admin') {
+        //     Session::regenerate();
 
-        elseif (auth()->user()->role === 'user') {
-            Session::regenerate();
+        //     return redirect()->route('user.index');
+        // }
 
-            return redirect()->route('registration.index');
-        }
+        // elseif (auth()->user()->role === 'user') {
+        //     Session::regenerate();
+
+        //     return redirect()->route('registration.index');
+        // }
     }
 }; ?>
 
