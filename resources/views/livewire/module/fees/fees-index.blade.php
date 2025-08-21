@@ -90,8 +90,16 @@
                                 <td>{{$fes->description}}</td>
                                 <td>{{$fes->amount}}</td>
                                 <td><button class="btn btn-info">Détail</button></td>
-                                <td><a href="{{route('fees.update',$fes->id)}}" class="btn btn-success">Modifier</a></td>
-                                <td><button wire:click="setFeesId({{$fes->id}})"  data-bs-toggle="modal" data-bs-target="#deleteFeesModal" class="btn btn-danger">Supprimer</button></td>
+                                <td>
+                                    @can('peut modifier un frais')
+                                        <a href="{{route('fees.update',$fes->id)}}" class="btn btn-success">Modifier</a>
+                                    @endcan
+                                </td>
+                                <td>
+                                    @can('peut supprimer un frais')
+                                        <button wire:click="setFeesId({{$fes->id}})"  data-bs-toggle="modal" data-bs-target="#deleteFeesModal" class="btn btn-danger">Supprimer</button>
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

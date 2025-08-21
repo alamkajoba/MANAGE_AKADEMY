@@ -53,23 +53,29 @@
                             </td>
 
                             <td>
-                                <a href="{{ route('permission.assign', $users->id)}}" style="background-color: rgb(2, 150, 9)" class="btn text-white">Assinger permissions</a>
+                                @can('peut assigner permission')
+                                    <a href="{{ route('permission.assign', $users->id)}}" style="background-color: rgb(2, 150, 9)" class="btn text-white">Assinger permissions</a>
+                                @endcan
                             </td>
 
                             <td>
-                                <a href="{{ route('user.userupdate', $users->id)}}" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
+                                @can('peut modifier un utilisateur')
+                                    <a href="{{ route('user.userupdate', $users->id)}}" style="background-color: rgb(240, 198, 10)" class="btn text-white">Modifier</a>
+                                @endcan
                             </td>
                             <td>
-                                <button 
-                                    style="background-color: rgb(207, 32, 32)" 
-                                    class="btn text-white"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#exampleModal" 
-                                    wire:click="setUserId({{ $users->id }})"
-                                    >
-                                    
-                                    Supprimer
-                                </button>
+                                @can('peut supprimer un utilisateur')
+                                    <button 
+                                        style="background-color: rgb(207, 32, 32)" 
+                                        class="btn text-white"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#exampleModal" 
+                                        wire:click="setUserId({{ $users->id }})"
+                                        >
+                                        
+                                        Supprimer
+                                    </button>
+                                @endcan
                             </td>
                         </tr>
                     @empty

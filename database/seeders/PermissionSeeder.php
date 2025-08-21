@@ -68,6 +68,10 @@ class PermissionSeeder extends Seeder
             'Palmarès' => [
                 'peut voir les palmarès des années',
             ],
+
+            'permission' => [
+                'peut assigner permission',
+            ],
         ];
 
         foreach ($permissions as $group => $perms) {
