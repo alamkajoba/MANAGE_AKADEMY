@@ -66,17 +66,21 @@
                                 <td>{{ $enrollments->option->faculty_name }}</td>
                             @endforeach
                             <td>
-                                <a href="{{ route('registration.update', $students->id) }}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
+                                @can('peut modifier un étudiant')
+                                    <a href="{{ route('registration.update', $students->id) }}" class="btn btn-warning btn-sm" title="Modifier l'étudiant">Modifier</a>
+                                @endcan
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteStudentModal" 
-                                    wire:click="setStudentId({{ $students->id }})"
-                                    >
-                                    
-                                    Supprimer
-                                </button>
+                                @can('peut supprimer un étudiant')
+                                    <button class="btn btn-danger btn-sm" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteStudentModal" 
+                                        wire:click="setStudentId({{ $students->id }})"
+                                        >
+                                        
+                                        Supprimer
+                                    </button>
+                                @endcan
                             </td>
                         </tr>
                     @empty

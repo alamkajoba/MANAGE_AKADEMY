@@ -29,7 +29,9 @@ class AssignPermission extends Component
 
         $this->role = $user->getRoleNames()->first();
         $this->name = $user->middle_name.' '.$user->last_name.' '.$user->first_name;
-
+        
+        // Permissions déjà assignées au user
+        $this->selectedPermissions = $user->permissions->pluck('id')->toArray();
     }
 
     public function save()
@@ -60,6 +62,7 @@ class AssignPermission extends Component
 
     public function render()
     {
+        
         $permissionsGrouped = Permission::paginate(10);
         return view('livewire.module.permissions.assign-permission',['permissionsGrouped'=> $permissionsGrouped]);
     }

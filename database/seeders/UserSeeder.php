@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
             'first_name' => 'Christian',
             'middle_name' => 'Kiyumbi',
             'last_name' => 'Kiyumbi',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password')
+            'email' => 'superadmin@example.com',
+            'password' => Hash::make('papabebe')
         ]);
 
-        $adminRole = Role::firstOrCreate(['name' => 'Prefet']);
+        $adminRole = Role::firstOrCreate(['name' => 'Superadmin']);
         $adminRole->syncPermissions(Permission::all());
         $user->assignRole($adminRole);
     }
