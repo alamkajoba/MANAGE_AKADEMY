@@ -9,7 +9,7 @@ use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class FeesCreate extends Component
 {
     public $name;

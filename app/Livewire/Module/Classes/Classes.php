@@ -7,7 +7,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class Classes extends Component
 {
     #[Validate('required|unique:levels')]

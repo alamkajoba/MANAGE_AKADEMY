@@ -17,18 +17,8 @@ new #[Layout('layouts.guest')] class extends Component
         $this->validate();
 
         $this->form->authenticate();
-
-        if (auth()->user()->role === 'admin') {
-            Session::regenerate();
-
-            return redirect()->route('user.index');
-        }
-
-        elseif (auth()->user()->role === 'user') {
-            Session::regenerate();
-
-            return redirect()->route('registration.index');
-        }
+        Session::regenerate();
+        return redirect()->route('registration.index');
     }
 }; ?>
 

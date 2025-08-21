@@ -8,8 +8,10 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class UserCreate extends Component
 {
     public string $first_name = '';
@@ -20,17 +22,28 @@ class UserCreate extends Component
     public string $function = '';
     public string $password = '';
 
+
     /**
      * Handle an incoming registration request.
      */
     public function register()
     {
+
+        //Be sure that we have only one function 
+        $converteRole = Str::lower(trim($this->role));
+        $checkRole = Role::whereRaw('LOWER(name) = ?', [$converteRole])->exists();
+
+        if($checkRole)
+        {
+            session()->flash('danger', "La fonction ".$this->role." est déjà attribuée ");
+            return redirect()->to(route('user.create'));
+        }
+
         $validated = $this->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'middle_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
-            'function' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string'],
         ]);
@@ -38,14 +51,15 @@ class UserCreate extends Component
             'first_name' => $this->first_name,
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
-            'role' => $this->role,
-            'function' => $this->function,
             'email' => $this->email,
             'password' => Hash::make($this->password)
         ]);
 
-        session()->flash('success', "L'utilisateur a été créé avec succès.");
-        return redirect()->to(route('user.create'));
+        $userRole = Role::firstOrCreate(['name' => $this->role]);
+        $create->assignRole($userRole);
+
+        session()->flash('success', "L'utilisateur ".$this->middle_name." ".$this->last_name." ".$this->first_name." a été créé avec succès.");
+        return redirect()->to(route('user.index'));
 
     }
 
