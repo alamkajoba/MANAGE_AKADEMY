@@ -8,7 +8,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Str;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class Faculty extends Component
 {
 

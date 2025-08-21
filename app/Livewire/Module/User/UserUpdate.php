@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class UserUpdate extends Component
 {
     public string $userId;

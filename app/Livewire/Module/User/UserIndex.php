@@ -9,7 +9,7 @@ use Livewire\Attributes\Url;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class UserIndex extends Component
 {
 
@@ -29,7 +29,7 @@ class UserIndex extends Component
     public $first_name ='';
     public $middle_name ='';
     public $last_name ='';
-    public $permission ='';
+    public $permission;
     public $createUser ='';
     public $roleUser ='';
 
@@ -61,14 +61,20 @@ class UserIndex extends Component
 
     public function detailUser($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('roles', 'permissions')->findOrFail($id);
+
         $this->first_name = $user->first_name;
         $this->middle_name = $user->middle_name;
         $this->last_name = $user->last_name;
+
+        // Récupérer tous les rôles (en array ou collection)
         $this->roleUser = $user->getRoleNames()->first();
-        $this->createUser = $user->created_at;
-        $this->permission = $user->getRoleNames()->first();
+
+        // Permissions directes + héritées
+        $this->permission = $user->getAllPermissions()->pluck('name')->toArray() ?? [];
+
     }
+
 
     public function render()
     {

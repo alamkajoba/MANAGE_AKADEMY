@@ -9,7 +9,7 @@ use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class AssignPermission extends Component
 {
 

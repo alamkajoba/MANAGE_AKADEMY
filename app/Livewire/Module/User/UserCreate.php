@@ -11,7 +11,7 @@ use Livewire\Attributes\Layout;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class UserCreate extends Component
 {
     public string $first_name = '';
@@ -58,7 +58,7 @@ class UserCreate extends Component
         $userRole = Role::firstOrCreate(['name' => $this->role]);
         $create->assignRole($userRole);
 
-        session()->flash('success', "L'utilisateur ".$this->middle_name." ".$this->middle_name." ".$this->middle_name." a été créé avec succès.");
+        session()->flash('success', "L'utilisateur ".$this->middle_name." ".$this->last_name." ".$this->first_name." a été créé avec succès.");
         return redirect()->to(route('user.index'));
 
     }

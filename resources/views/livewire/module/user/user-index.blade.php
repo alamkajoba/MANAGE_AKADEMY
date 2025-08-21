@@ -119,9 +119,18 @@
                     </div>
                     <div class="modal-body">
                         <p>Agent: <strong>{{$first_name}} {{$middle_name}} {{$last_name}}</strong></p>
-                        <p>Role: <strong>{{$roleUser}}</strong></p>
-                        <p>Membre depuis: <strong>{{$createUser}}</strong></p>
-                        <p>Permission: <strong>{{$roleUser}}</strong></p>
+                        <p>Role: <strong>{{ $roleUser }}</strong></p>
+                        <p>Permission: 
+                            <strong>
+                                <ul>
+                                    @forelse($permission ?? [] as $perm)
+                                        <li>{{ $perm }}</li>
+                                    @empty
+                                        <li>Aucune permission</li>
+                                    @endforelse
+                                </ul>
+                            </strong>
+                        </p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
