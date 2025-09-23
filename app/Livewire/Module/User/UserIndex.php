@@ -79,13 +79,15 @@ class UserIndex extends Component
     public function render()
     {
         $query = User::where('id', '!=', 1)
-                ->where(function ($q) {
+            ->where(function ($q) {
+                if ($this->search) {  // Vérifiez si $this->search a une valeur
                     $q->where('first_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('role', 'like', '%' . $this->search . '%')
-                    ->orWhere('function', 'like', '%' . $this->search . '%');
-                });
+                        ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+                        ->orWhere('last_name', 'like', '%' . $this->search . '%')
+                        ->orWhere('role', 'like', '%' . $this->search . '%')  // Assurez-vous que 'role' existe bien dans votre table
+                        ->orWhere('function', 'like', '%' . $this->search . '%');
+                }
+            });
 
         return view('livewire.module.user.user-index',[
                 'user' => $query->latest()->paginate(5),
