@@ -72,7 +72,7 @@
                                 wire:model="email"
                             >
 
-                            <label for="">Selectionner Role</label>
+                            <label for="">Attribuer Role</label>
                             <input 
                                 required
                                 class="form-control"
