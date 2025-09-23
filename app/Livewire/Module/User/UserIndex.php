@@ -83,9 +83,7 @@ class UserIndex extends Component
                 if ($this->search) {  // Vérifiez si $this->search a une valeur
                     $q->where('first_name', 'like', '%' . $this->search . '%')
                         ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                        ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                        ->orWhere('role', 'like', '%' . $this->search . '%')  // Assurez-vous que 'role' existe bien dans votre table
-                        ->orWhere('function', 'like', '%' . $this->search . '%');
+                        ->orWhere('last_name', 'like', '%' . $this->search . '%');
                 }
             });
 
