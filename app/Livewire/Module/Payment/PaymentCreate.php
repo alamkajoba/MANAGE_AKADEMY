@@ -102,16 +102,17 @@ class PaymentCreate extends Component
         }
         else{
             Payment::create([
-                'enrollment_id' => $this->search,
-                'school_fees_id' => $this->fees,
+                'enrollment_id' => $this->studentId,
+                'school_fees_id' => $this->feesId,
                 'academic_year_id' => $academic_id
             ]);
             $this->reset();
         session()->flash('success', "Paiement effectué avec succès.");
-        return redirect()->to(route('recovery.create'));
+        return redirect()->to(route('recovery.pritnt'));
         }
-        
     }
+    }
+}
 
     public function render()
     {

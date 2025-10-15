@@ -76,17 +76,11 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
 });
 
-<<<<<<< HEAD
 #Finance route
 Route::middleware('auth')->prefix('finance')->name('finance.')->group(function () {
     Route::get('financecreate', FinanceCreate::class)->name('create');
     Route::get('financeindex', FinanceIndex::class)->name('index');
     Route::get('financeupdate/{id}', FinanceUpdate::class)->name('financeupdate');
-=======
-#Permissions and roles
-Route::middleware('auth')->prefix('permission')->name('permission.')->group(function () {
-    Route::get('assign/{id}', AssignPermission::class)->name('assign');
->>>>>>> 7b439c2aa6db2b4389df06d823d130ee33da2030
 });
 
 

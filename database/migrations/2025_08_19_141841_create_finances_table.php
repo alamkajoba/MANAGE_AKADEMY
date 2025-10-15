@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->float('amount');
+            $table->unsignedBigInteger('academic_year_id')->nullable();
+            $table->foreign('academic_year_id')->references('id')->on('academic_years');
             
             $table->timestamps();
         });

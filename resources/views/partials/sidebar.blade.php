@@ -182,7 +182,6 @@
                 </div>
             </li>
 
-<<<<<<< HEAD:resources/views/partials/partialsadmin/sidebar.blade.php
             
             {{-- <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -201,8 +200,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-=======
->>>>>>> 7b439c2aa6db2b4389df06d823d130ee33da2030:resources/views/partials/sidebar.blade.php
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
