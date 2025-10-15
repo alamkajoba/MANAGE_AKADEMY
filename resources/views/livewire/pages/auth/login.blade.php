@@ -17,18 +17,8 @@ new #[Layout('layouts.guest')] class extends Component
         $this->validate();
 
         $this->form->authenticate();
-
-        if (auth()->user()->role === 'admin') {
-            Session::regenerate();
-
-            return redirect()->route('user.index');
-        }
-
-        elseif (auth()->user()->role === 'user') {
-            Session::regenerate();
-
-            return redirect()->route('registration.index');
-        }
+        Session::regenerate();
+        return redirect()->route('registration.index');
     }
 }; ?>
 
@@ -38,7 +28,7 @@ new #[Layout('layouts.guest')] class extends Component
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="text-center">
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="w-32 h-auto mx-auto rounded-circle">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo" width="200px" class="mx-auto rounded-circle">
     </div>
 
     <form wire:submit="login">

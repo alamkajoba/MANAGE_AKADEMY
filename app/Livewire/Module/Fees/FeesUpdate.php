@@ -6,7 +6,7 @@ use App\Models\SchoolFee;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-#[layout('layouts.topadmin')]
+#[layout('layouts.app')]
 
 class FeesUpdate extends Component
 {

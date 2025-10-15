@@ -9,7 +9,7 @@ use Livewire\Attributes\Url;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class UserIndex extends Component
 {
 
@@ -29,7 +29,7 @@ class UserIndex extends Component
     public $first_name ='';
     public $middle_name ='';
     public $last_name ='';
-    public $functionUser ='';
+    public $permission;
     public $createUser ='';
     public $roleUser ='';
 
@@ -61,23 +61,31 @@ class UserIndex extends Component
 
     public function detailUser($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with('roles', 'permissions')->findOrFail($id);
+
         $this->first_name = $user->first_name;
         $this->middle_name = $user->middle_name;
         $this->last_name = $user->last_name;
-        $this->functionUser = $user->function;
-        $this->createUser = $user->created_at;
-        $this->roleUser = $user->role;
+
+        // Récupérer tous les rôles (en array ou collection)
+        $this->roleUser = $user->getRoleNames()->first();
+
+        // Permissions directes + héritées
+        $this->permission = $user->getAllPermissions()->pluck('name')->toArray() ?? [];
+
     }
+
 
     public function render()
     {
-
-        $query = User::where('first_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('middle_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                    ->orWhere('role', 'like', '%' . $this->search . '%')
-                    ->orWhere('function', 'like', '%' . $this->search . '%');
+        $query = User::where('id', '!=', 1)
+            ->where(function ($q) {
+                if ($this->search) {  // Vérifiez si $this->search a une valeur
+                    $q->where('first_name', 'like', '%' . $this->search . '%')
+                        ->orWhere('middle_name', 'like', '%' . $this->search . '%')
+                        ->orWhere('last_name', 'like', '%' . $this->search . '%');
+                }
+            });
 
         return view('livewire.module.user.user-index',[
                 'user' => $query->latest()->paginate(5),

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
-#[Layout('layouts.topadmin')]
+#[Layout('layouts.app')]
 class FeesIndex extends Component
 {
 

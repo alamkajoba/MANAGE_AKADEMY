@@ -4,6 +4,7 @@ namespace App\Livewire\Module\Payment;
 
 use App\Enums\AcademicYearStatus;
 use App\Models\AcademicYear;
+use App\Models\Enrollment;
 use App\Models\Payment;
 use App\Models\SchoolFee;
 use App\Models\Student;
@@ -18,12 +19,14 @@ class PaymentCreate extends Component
     public $search = '';
     public $items_student = [];
     public $selected_student = [null];
+    public $studentId;
     
 
     //Var for auto complete student
     public $fees = '';
     public $items_fees = [];
     public $selected_fees = [null];
+    public $feesId;
 
     public function searchStundent(): void
     {
@@ -42,16 +45,21 @@ class PaymentCreate extends Component
     {
         // Sélectionne un élément
         $this->selected_student = Student::find($itemId)->toArray();
-        $this->search = $this->selected_student['id'];
+        $this->search = $this->selected_student['middle_name'].' '.$this->selected_student['last_name'].' '.$this->selected_student['first_name'];
+        $this->studentId = $this->selected_student['id'];
         $this->items_student = []; // Vide les suggestions
 
     }
 
     public function searchFees(): void
     {
-        //Looking for items
-        $this->items_fees = SchoolFee::where('name', 'like', '%'.$this->fees.'%')
-            ->orwhere('description', 'like', '%'.$this->search.'%')
+        $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
+
+        $this->items_fees = SchoolFee::where('academic_year_id', $academic_id)
+            ->where(function ($query) {
+                $query->where('name', 'like', '%'.$this->fees.'%')
+                    ->orWhere('description', 'like', '%'.$this->search.'%');
+            })
             ->limit(3)
             ->get()
             ->toArray();
@@ -62,7 +70,8 @@ class PaymentCreate extends Component
     {
         // Sélectionne un élément
         $this->selected_fees = SchoolFee::find($itemId)->toArray();
-        $this->fees = $this->selected_fees['id'];
+        $this->fees = $this->selected_fees['name'].' '.$this->selected_fees['amount'] .'Fc';
+        $this->feesId = $this->selected_fees['id'];
         $this->items_fees = []; // Vide les suggestions
 
     }
@@ -73,11 +82,18 @@ class PaymentCreate extends Component
         //Select active year
         $academic_id = AcademicYear::where('status', AcademicYearStatus::CURRENT->value)->value('id');
 
-      
-        //check if exist
-        $exist = Payment::where('enrollment_id', $this->search)
-        ->where('school_fees_id', $this->fees)
-        ->where('academic_year_id', $academic_id)->exists();
+        //Be sure is not null
+        if($this->studentId)
+        {
+            //Be sure is not null
+            if($this->feesId)
+            {
+                //check if exist
+                $exist = Payment::where('enrollment_id', $this->studentId)
+                ->where('school_fees_id', $this->feesId)
+                ->where('academic_year_id', $academic_id)->exists();
+
+                //where Student is not saved in current year
 
         if($exist){
             $this->reset();
@@ -92,7 +108,7 @@ class PaymentCreate extends Component
             ]);
             $this->reset();
         session()->flash('success', "Paiement effectué avec succès.");
-        return redirect()->to(route('recovery.print'));
+        return redirect()->to(route('recovery.create'));
         }
         
     }

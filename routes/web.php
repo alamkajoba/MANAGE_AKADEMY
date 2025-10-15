@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Module\Permissions\AssignPermission;
 use App\Livewire\Module\AcademicYear\AcademicYearIndex;
 use App\Livewire\Module\Classes\Classes;
 use App\Livewire\Module\Faculty\Faculty;
@@ -11,7 +12,6 @@ use App\Livewire\Module\Recovery\RecoveryCreate;
 use App\Livewire\Module\Recovery\RecoveryPrint;
 use App\Livewire\Module\Registration\RegistrationCreate;
 use App\Livewire\Module\Registration\RegistrationIndex;
-use App\Livewire\Module\Registration\RegistrationIndexAdmin;
 use App\Livewire\Module\Registration\RegistrationUpdate;
 use App\Livewire\Module\ReRegistration\ReRegistrationCreate;
 use App\Livewire\Module\User\UserCreate;
@@ -33,7 +33,6 @@ Route::view('profile', 'profile')
 #Registration route
 Route::middleware('auth')->prefix('registration')->name('registration.')->group(function () {
     Route::get('index', RegistrationIndex::class)->name('index');
-    Route::get('indexadmin', RegistrationIndexAdmin::class)->name('indexadmin');
     Route::get('create', RegistrationCreate::class)->name('create');
     Route::get('reregistrationupdate/{id}', RegistrationUpdate::class)->name('update');
 });
@@ -77,11 +76,17 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
 });
 
+<<<<<<< HEAD
 #Finance route
 Route::middleware('auth')->prefix('finance')->name('finance.')->group(function () {
     Route::get('financecreate', FinanceCreate::class)->name('create');
     Route::get('financeindex', FinanceIndex::class)->name('index');
     Route::get('financeupdate/{id}', FinanceUpdate::class)->name('financeupdate');
+=======
+#Permissions and roles
+Route::middleware('auth')->prefix('permission')->name('permission.')->group(function () {
+    Route::get('assign/{id}', AssignPermission::class)->name('assign');
+>>>>>>> 7b439c2aa6db2b4389df06d823d130ee33da2030
 });
 
 

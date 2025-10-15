@@ -86,13 +86,15 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm"
-                                            wire:click=""
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#deleteAcademicModal"
-                                            title="Supprimer l'étudiant">
-                                            Supprimer
-                                    </button>
+                                    @can('peut supprimer une année')
+                                        <button class="btn btn-danger btn-sm"
+                                                wire:click=""
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#deleteAcademicModal"
+                                                title="Supprimer l'étudiant">
+                                                Supprimer
+                                        </button>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
