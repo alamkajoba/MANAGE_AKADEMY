@@ -95,33 +95,24 @@ class PaymentCreate extends Component
 
                 //where Student is not saved in current year
 
-                if($exist){
-                    $this->reset();
-                    session()->flash('danger', "l'élève a deja payé ce frais!!!.");
-                    return redirect()->to(route('payment.create'));
-                }
-                else{
-                    Payment::create([
-                        'enrollment_id' => $this->studentId,
-                        'school_fees_id' => $this->feesId,
-                        'academic_year_id' => $academic_id
-                    ]);
-                    $this->reset();
-                session()->flash('success', "Paiement effectué avec succès.");
-                return redirect()->to(route('payment.create'));
-                }
-            }
-            else{
-                session()->flash('danger', "Aucun frais n'a été selectionné");
-                return redirect()->to(route('payment.create'));
-            }
-        }
-        else{
-            session()->flash('danger', "Aucun étudiant n'a été selectionné");
+        if($exist){
+            $this->reset();
+            session()->flash('danger', "l'élève a deja payé ce frais!!!.");
             return redirect()->to(route('payment.create'));
         }
-        
+        else{
+            Payment::create([
+                'enrollment_id' => $this->studentId,
+                'school_fees_id' => $this->feesId,
+                'academic_year_id' => $academic_id
+            ]);
+            $this->reset();
+        session()->flash('success', "Paiement effectué avec succès.");
+        return redirect()->to(route('recovery.pritnt'));
+        }
     }
+    }
+}
 
     public function render()
     {
