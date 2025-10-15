@@ -17,6 +17,9 @@ use App\Livewire\Module\ReRegistration\ReRegistrationCreate;
 use App\Livewire\Module\User\UserCreate;
 use App\Livewire\Module\User\UserIndex;
 use App\Livewire\Module\User\UserUpdate;
+use App\Livewire\Module\Finance\FinanceCreate;
+use App\Livewire\Module\Finance\FinanceIndex;
+use App\Livewire\Module\Finance\FinanceUpdate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -72,6 +75,13 @@ Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
     Route::get('usercreate', UserCreate::class)->name('create');
     Route::get('userindex', UserIndex::class)->name('index');
     Route::get('userupdate/{id}', UserUpdate::class)->name('userupdate');
+});
+
+#Finance route
+Route::middleware('auth')->prefix('finance')->name('finance.')->group(function () {
+    Route::get('financecreate', FinanceCreate::class)->name('create');
+    Route::get('financeindex', FinanceIndex::class)->name('index');
+    Route::get('financeupdate/{id}', FinanceUpdate::class)->name('financeupdate');
 });
 
 

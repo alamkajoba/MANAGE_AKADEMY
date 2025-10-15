@@ -113,6 +113,20 @@
                     </div>
                 </div>
             </li>
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFinance"
+                    aria-expanded="true" aria-controls="collapseFinance">
+                    <i style="color:white;" class="fas fa-cog"></i>
+                    <span style="color:white;">Gestion Finance</span>
+                </a>
+                <div id="collapseFinance" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 style="color:black;" class="collapse-header">Finance:</h6>
+                        <a style="color:black;" class="collapse-item" href="{{route('finance.create')}}">Enregistrer depenses</a>
+                        <a style="color:black;" class="collapse-item" href="{{route('finance.index')}}">Voir inventaire</a>
+                    </div>
+                </div>
+            </li>
 
             
             {{-- <!-- Nav Item - Charts -->
@@ -126,7 +140,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i style="color:white;" class="fas fa-fw fa-table"></i>
-                    <span style="color:white;">Tables</span></a>
+                    <span style="color:white;">Tables</span></a>    
             </li> --}}
 
             <!-- Divider -->
