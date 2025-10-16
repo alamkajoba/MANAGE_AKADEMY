@@ -108,7 +108,7 @@ class PaymentCreate extends Component
             ]);
             $this->reset();
         session()->flash('success', "Paiement effectué avec succès.");
-        return redirect()->to(route('recovery.pritnt'));
+        return redirect()->to(route('recovery.print'));
         }
     }
     }

@@ -25,7 +25,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-                            Dépense Journalière
+                            Total Dépenses
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                             {{ $this->totalDepenses }} USD
@@ -69,19 +69,21 @@
                 <h6 class="m-0 font-weight-bold text-success">Entrées (Frais encaissés)</h6>
             </div>
             <div class="card-body">
+                <br>
+                
                 <table class="table table-bordered table-striped">
                     <thead style="background-color: rgb(7, 7, 99)" class="text-white">
                         <tr>
-                            <th>Nom élève</th>
-                            <th>Frais</th>
+                           
+                            <th>Motif</th>
                             <th>Montant</th>
-                            <th>Date</th>
+                            <th>Date entrée</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($entrees as $paiement)
                             <tr>
-                                <td>{{ $paiement->enrollment?->student?->first_name ?? '-' }}</td>
+                               
                                 <td>{{ $paiement->fees?->name ?? '-' }}</td>
                                 <td>{{ number_format($paiement->fees?->amount ?? 0, 2, ',', ' ') }} USD</td>
                                 <td>{{ \Carbon\Carbon::parse($paiement->created_at)->format('d/m/Y H:i') }}</td>
@@ -101,19 +103,25 @@
         </div>
     </div>
    
-   
 
     <!-- Colonne Sorties -->
     <div class="col-md-6">
+        
         <div class="card shadow mb-4">
             <div class="card-header py-3 bg-white">
                 <h6 class="m-0 font-weight-bold text-danger">Sorties (Dépenses)</h6>
             </div>
             <div class="card-body">
+                <div class="mb-3">
+                        <label>Date début :</label>
+                        <input type="date" wire:model.live="dateDebut" class="form-control d-inline w-auto mx-2">
+                        <label>Date fin :</label>
+                        <input type="date" wire:model.live="dateFin" class="form-control d-inline w-auto mx-2">
+                </div>
                 <table class="table table-bordered table-striped">
                     <thead style="background-color: rgb(7, 7, 99)" class="text-white">
                         <tr>
-                            <th>Description</th>
+                            <th>Motif dépense</th>
                             <th>Montant</th>
                             <th>Date</th>
                         </tr>
@@ -136,6 +144,7 @@
             {{ $depenses->links() }}
         </div>
             </div>
+            
            
         </div>
         
